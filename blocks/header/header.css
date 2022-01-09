@@ -1,0 +1,12 @@
+.header {
+    max-width: 100%;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    box-sizing: border-box;
+    border-bottom: 1px solid #545454;
+    margin: 0 200px 36.25px;
+    padding: 0;
+    
+}
