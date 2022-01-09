@@ -8,5 +8,19 @@
     border-bottom: 1px solid #545454;
     margin: 0 200px 36.25px;
     padding: 0;
-    
+}
+
+@media screen and (max-width: 984px) {
+    .header {
+        margin-right: 100px;
+        margin-left: 100px;
+    } 
+ }
+
+
+@media screen and (max-width: 568px) {
+    .header {
+        margin-right: 0;
+        margin-left: 0;
+    }
 }
