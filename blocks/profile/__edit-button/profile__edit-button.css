@@ -1,0 +1,14 @@
+.profile__edit-button {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    opacity: 1;
+    transition: opacity .3s ease;
+}
+.profile__edit-button:hover {
+    opacity: .6;
+}
