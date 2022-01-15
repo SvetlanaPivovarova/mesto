@@ -8,3 +8,17 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+@media screen and (max-width: 730px) {
+    .profile__name {
+        text-align: center;
+        grid-column: 2/3;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    .profile__name {
+        font-size: 27px;
+        line-height: 32.68px;
+    }
+}

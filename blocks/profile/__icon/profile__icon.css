@@ -3,3 +3,10 @@
     height: 22px;
     background: url(/images/Vector_add-button.svg) no-repeat center / cover;
 }
+
+@media screen and (max-width: 568px) {
+    .profile__icon {
+        width: 16px;
+        height: 16px;
+    }
+}
