@@ -1,0 +1,16 @@
+.elements__like-icon {
+    background-image: url(/images/Vector_like-icon.svg);
+    width: 22px;
+    height: 19px;
+    align-self: center;
+    opacity: 1;
+    transition: opacity .3s ease;
+}
+
+.elements__like-icon:hover {
+    opacity: .6;
+}
+
+.elements__like-icon:active {
+    background-image: url(/images/Union_black-like-icon.svg);
+}
