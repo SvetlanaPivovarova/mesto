@@ -1,5 +1,5 @@
 .popup {
-    width: 100vw;
+    width: 100%;
     max-height: 100vh;
     color: #fff;
     display: flex;
@@ -24,40 +24,4 @@
     right: 0;
     bottom: 0;
     z-index: -1;
-}
-
-.popup:hover {
-
-}
-/*
-
-.cover__item {
-    min-height: 740px;
-    width: 100%;
-    color: #fff;
-    text-decoration: none;
-    box-sizing: border-box;
-    background-image: url(../../../images/cover-trains.jpg);
-    background-size: cover;
-    background-position: 50% 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 20px;
-    z-index: 1;
-}
-
-.cover__item::before {
-    content: '';
-    background: #2A2C2F;
-    opacity: .3;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    transition: opacity .3s ease;
 }

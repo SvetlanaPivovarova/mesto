@@ -2,11 +2,21 @@
     background-color: #fff;
     border-radius: 10px;
     width: 430px;
-    height: 330px;
+    min-height: 330px;
     display: flex;
     flex-direction: column;
     padding: 0 36px;
     box-sizing: border-box;
     position: relative;
     margin-top: 195px;
+}
+
+@media screen and (max-width: 568px) {
+    .popup__container {
+        width: 282px;
+        min-height: 322px;
+        padding-left: 22px;
+        padding-right: 22px;
+        margin-top: 123px;
+    }
 }

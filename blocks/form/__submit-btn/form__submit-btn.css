@@ -16,3 +16,12 @@
 .form__submit-btn:hover {
     opacity: .8;
 }
+
+@media screen and (max-width: 568px) {
+    .form__submit-btn {
+        width: 238px;
+        height: 46px;
+        margin-top: 45px;
+        padding-bottom: 0;
+    }
+}
