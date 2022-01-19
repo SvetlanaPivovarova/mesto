@@ -3,6 +3,7 @@
     top: -40px;
     right: -40px;
     opacity: 1;
+    cursor: pointer;
     transition: opacity .3s ease;
 }
 

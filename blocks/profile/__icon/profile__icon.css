@@ -1,7 +1,6 @@
 .profile__icon {
     width: 22px;
     height: 22px;
-    background: url(/images/Vector_add-button.svg) no-repeat center / cover;
 }
 
 @media screen and (max-width: 568px) {

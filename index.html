@@ -12,7 +12,6 @@
     </header>
     <main class="content">
       <section class="profile content__section">
-        
           <img class="profile__avatar" src="./images/image_kusto.jpg">
           <div class="profile__info">
             <p class="profile__name">Жак-Ив Кусто</p>
@@ -24,10 +23,13 @@
             <p class="profile__profession">Исследователь океана</p>
           </div>
         <div class="profile__add-button">
-          <div class="profile__icon"></div>
+          <div class="profile__icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 7.11111H8.88889V0H7.11111V7.11111H0V8.88889H7.11111V16H8.88889V8.88889H16V7.11111Z" fill="white"/>
+            </svg>
+          </div>
         </div>
       </section>
-
       <section class="elements content__section">
         <div class="elements__rectangle">
           <img class="elements__image" src="./images/kirill-pershin-1088404-unsplash_elements.jpg" alt="Старинное здание на фоне гор">
@@ -72,27 +74,24 @@
           </div>
         </div> 
       </section>
-
-      <section class="popup ">
-        <div class="popup__container">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <div class="popup__close-btn">
-            <img class="popup__close-icon" src="./images/Close Icon.svg">
-          </div>
-          <form class="form">
-            <input type="text" placeholder="Имя" class="form__text form__text_type_name">
-            <input type="text" placeholder="О себе" class="form__text form__text_type_about">
-            <button class="form__submit-btn form__submit-btn_action_save">
-              Сохранить
-            </button>
-          </form>
-        </div>
-      </section>
-
-      <footer class="footer content__section">
-        <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-      </footer>
     </main>
-    <footer>
+    <footer class="footer content__section">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+
+    <div class="popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <div class="popup__close-btn">
+          <img class="popup__close-icon" src="./images/Close Icon.svg">
+        </div>
+        <form class="form">
+          <input type="text" placeholder="Имя" class="form__text form__text_type_name" value="Жак-Ив Кусто">
+          <input type="text" placeholder="О себе" class="form__text form__text_type_about" value="Исследователь океана">
+          <input type="submit" class="form__submit-btn" value="Сохранить">
+        </form>
+      </div>
+    </div>
+    <script src="./scripts/index.js"></script>
 </body>
+</html>
