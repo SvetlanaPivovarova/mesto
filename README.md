@@ -22,4 +22,4 @@
 * интерактивность посредством JS.
 
 **Размещение проекта**
-* [Место]()
+* [Место](https://svetlanapivovarova.github.io/mesto/index.html)
