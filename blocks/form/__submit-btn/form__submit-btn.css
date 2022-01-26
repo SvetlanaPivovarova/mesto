@@ -5,8 +5,9 @@
     font-size: 18px;
     line-height: 22px;
     border: 0;
+    border-radius: 2px;
     background-color: #000;
-    margin: 48px 0 0;
+    margin: 48px 0 45px;
     padding-bottom: 4px;
     color: #fff;
     cursor: pointer;
@@ -23,6 +24,9 @@
         width: 238px;
         height: 46px;
         margin-top: 45px;
+        margin-bottom: 25px;
         padding-bottom: 0;
+        font-size: 14px;
+        line-height: 17px;
     }
 }

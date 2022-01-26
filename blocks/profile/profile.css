@@ -21,6 +21,7 @@
         grid-template-columns: repeat(1, minmax(282px, 692px));
         grid-template-rows: max-content;
         justify-items: center;
+        margin-bottom: 36px;
     }
 }
 

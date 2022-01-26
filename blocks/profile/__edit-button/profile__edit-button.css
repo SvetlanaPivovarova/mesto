@@ -3,7 +3,7 @@
     height: 24px;
     border: 1px solid #ffffff;
     background-image: url(../../../images/Vector_edit-button.svg);
-    background-color: #000;
+    background-color: transparent;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     align-self: center;

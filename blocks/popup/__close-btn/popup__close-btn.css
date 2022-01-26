@@ -6,7 +6,8 @@
     width: 32px;
     height: 32px;
     background-image: url(../../../images/Close_Icon.svg);
-    background-color: #000;
+    background-color: transparent;
+    background-size: 32px;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     opacity: 1;
@@ -24,5 +25,6 @@
         right: 0;
         width: 20px;
         height: 20px;
+        background-size: 20px;
     }
 }
