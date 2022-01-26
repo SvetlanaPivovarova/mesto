@@ -15,53 +15,53 @@
       <section class="profile content__section">
           <img class="profile__avatar" src="./images/image_kusto.jpg" alt="Фотография пользователя">
           <div class="profile__info">
-            <p class="profile__name">Жак-Ив Кусто</p>
-            <button class="profile__edit-button"></button>
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
             <p class="profile__profession">Исследователь океана</p>
           </div>
-        <button class="profile__add-button"></button>
+        <button class="profile__add-button" type="button" aria-label="Добавить"></button>
       </section>
       <section class="elements content__section">
         <div class="elements__rectangle">
           <img class="elements__image" src="./images/kirill-pershin-1088404-unsplash_elements.jpg" alt="Старинное здание на фоне гор">
           <div class="elements__caption">
             <h2 class="elements__place-title">Карачаевск</h2>
-            <button class="elements__like-icon"></button>
+            <button class="elements__like-icon" type="button" aria-label="Нравится"></button>
           </div>
         </div>
         <div class="elements__rectangle">
           <img class="elements__image" src="./images/kirill-pershin-1404681-unsplash_elbrus.jpg" alt="Гора Эльбрус на закате">
           <div class="elements__caption">
             <h2 class="elements__place-title">Гора Эльбрус</h2>
-            <button class="elements__like-icon"></button>
+            <button class="elements__like-icon" type="button" aria-label="Нравится"></button>
           </div>
         </div>
         <div class="elements__rectangle">
           <img class="elements__image" src="./images/kirill-pershin-1556355-unsplash_dombaj.jpg" alt="Гора Домбай">
           <div class="elements__caption">
             <h2 class="elements__place-title">Домбай</h2>
-            <button class="elements__like-icon"></button>
+            <button class="elements__like-icon" type="button" aria-label="Нравится"></button>
           </div>
         </div>
         <div class="elements__rectangle">
           <img class="elements__image" src="./images/kirill-pershin-1404681-unsplash_elbrus.jpg" alt="Гора Эльбрус на закате">
           <div class="elements__caption">
             <h2 class="elements__place-title">Гора Эльбрус</h2>
-            <button class="elements__like-icon"></button>
+            <button class="elements__like-icon" type="button" aria-label="Нравится"></button>
           </div>
         </div>
         <div class="elements__rectangle">
           <img class="elements__image" src="./images/kirill-pershin-1556355-unsplash_dombaj.jpg" alt="Гора Домбай">
           <div class="elements__caption">
             <h2 class="elements__place-title">Домбай</h2>
-            <button class="elements__like-icon"></button>
+            <button class="elements__like-icon" type="button" aria-label="Нравится"></button>
           </div>
         </div>
         <div class="elements__rectangle">
           <img class="elements__image" src="./images/kirill-pershin-1088404-unsplash_elements.jpg" alt="Старинное здание на фоне гор">
           <div class="elements__caption">
             <h2 class="elements__place-title">Карачаево-Черкессия</h2>
-            <button class="elements__like-icon"></button>
+            <button class="elements__like-icon" type="button" aria-label="Нравится"></button>
           </div>
         </div> 
       </section>
@@ -73,10 +73,10 @@
     <div class="popup">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <button class="popup__close-btn"></button>
-        <form class="form">
-          <input type="text" placeholder="Имя" class="form__text form__text_type_name">
-          <input type="text" placeholder="О себе" class="form__text form__text_type_about">
+        <button class="popup__close-btn" type="button"  aria-label="Закрыть"></button>
+        <form class="form" name="profile-information">
+          <input type="text" placeholder="Имя" name="name" class="form__text form__text_type_name">
+          <input type="text" placeholder="О себе" name="about" class="form__text form__text_type_about">
           <button type="submit" class="form__submit-btn">Сохранить</button>
         </form>
       </div>
