@@ -82,11 +82,11 @@ const getCardElement = (item) => {                            //получить
   cardTitle.textContent = item.name;     //наполнить содержимым - название
   cardImage.src = item.link;             //наполнить содержимым - ссылка
   cardImage.alt = item.name;             //наполнить содержимым - alt
-  
+
   return card;
 }
 
-const renderCard = (item, wrap) => {
+const renderCard = (item, wrap) => {     //добавление карточки в начало списка
   const card = getCardElement(item)
   wrap.prepend(card)
 }
@@ -98,9 +98,8 @@ const handleCardFormSubmit = (evt) => {   //форма для создания �
       link: cardInputLink.value
   };
   renderCard(cardUser, cardsWrap);          //вызвать функцию создания карточки, передать переменные card из формы и cardsWrap
-  
   closePopup(popupCard);
-  formNewPlace.reset();
+  formNewPlace.reset();                   //очистить форму
 };
 
 initialCards.forEach(item => {          //создать 6 первоначальных карточек, данные хранятся в массиве initialCards
