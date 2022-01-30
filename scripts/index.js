@@ -1,34 +1,35 @@
 const initialCards = [
     {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+      name: 'Стокгольм, Швеция',
+      link: 'https://images.unsplash.com/photo-1642969177971-98f9902f66fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
     },
     {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+      name: 'Теотиуакан, штат Мехико, Мексика',
+      link: 'https://images.unsplash.com/photo-1643177159923-94f0917f3dbd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
     {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+      name: 'Венеция, Италия',
+      link: 'https://images.unsplash.com/photo-1643128847945-7d25aa40a60b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=874&q=80'
     },
     {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+      name: 'Амстердам, Нидерланды',
+      link: 'https://images.unsplash.com/photo-1639690086835-719591757bc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80'
     },
     {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+      name: 'Муссури, Уттаракханд, Индия',
+      link: 'https://images.unsplash.com/photo-1643017599693-64caa559e08f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
     },
     {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+      name: 'Акурейри, Исландия',
+      link: 'https://images.unsplash.com/photo-1642781518748-0e2fce1c733f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80'
     }
   ];
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonCloseProfile = document.querySelector('.popup__close-btn_type_profile');
 const popup = document.querySelector('.popup');
-const popupProfile = document.querySelector('.popup_type_profile')
+const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
+const popupFullSizeImage = document.querySelector('.popup_type_image');
 const popupOpenedClass = 'popup_opened';
 let formElement = document.querySelector('.form'); 
 let formProfile = document.querySelector('[name="profile-information"]');
@@ -43,7 +44,9 @@ let cardInputLink = document.querySelector('.form__text_type_place-link');    //
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.card'); //выбрать элемент темплейта для создания карточки
 const buttonAddCard = document.querySelector('.profile__add-button');
 const buttonCloseAddCard = document.querySelector('.popup__close-btn_type_card');
-
+const fullSizeImage = document.querySelector('.popup__image-item');
+const fullSizeImageCaption = document.querySelector('.popup__title_type_image-caption');
+const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
 
 function openPopup(item) {  //функция открытия поп-ап профила
     item.classList.add(popupOpenedClass);
@@ -55,7 +58,7 @@ function closePopup(item) {     //функция закрытия поп-ап
     item.classList.remove(popupOpenedClass);
 };
 
-function formSubmitUserHandler (evt) {
+function formSubmitUserHandler (evt) {      //функция отправки данных формы профиля
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
@@ -76,13 +79,20 @@ const getCardElement = (item) => {                            //получить
   const cardImage = card.querySelector('.card__image');
   const cardLikeButton = card.querySelector('.card__like-icon');
   const cardDeleteButton = card.querySelector('.card__delete-icon');
-
+  
   cardLikeButton.addEventListener('click', handleLikeButton);
   cardDeleteButton.addEventListener('click', handleDeleteButton);
+  
   cardTitle.textContent = item.name;     //наполнить содержимым - название
   cardImage.src = item.link;             //наполнить содержимым - ссылка
   cardImage.alt = item.name;             //наполнить содержимым - alt
-
+  
+  cardImage.addEventListener('click', function() {
+  fullSizeImage.src = item.link;
+  fullSizeImageCaption.textContent = item.name;
+  fullSizeImage.alt = item.name;
+  openPopup(popupFullSizeImage);
+  });
   return card;
 }
 
@@ -121,7 +131,8 @@ buttonAddCard.addEventListener ('click',function() {
 buttonCloseAddCard.addEventListener ('click', function() {
   closePopup(popupCard);
 })
-
+buttonCloseImage.addEventListener ('click', function() {
+  closePopup(popupFullSizeImage);
+})
 formProfile.addEventListener('submit', formSubmitUserHandler); 
-
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
