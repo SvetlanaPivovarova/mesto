@@ -8,4 +8,10 @@
     border-radius: 10px 10px 0 0;
     grid-row: 1 / span 3;
     grid-column: 1 / span 3;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity .3s ease;
+}
+.card__image:hover {
+    opacity: .8;
 }
