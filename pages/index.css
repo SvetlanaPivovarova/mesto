@@ -42,7 +42,11 @@
 @import url(../blocks/form/__text/form__text.css);
 @import url(../blocks/form/__text/_type/form__text_type_name.css);
 @import url(../blocks/form/__text/_type/form__text_type_about.css);
+@import url(../blocks/form/__text/_type/form__text_type_error.css);
 @import url(../blocks/form/__submit-btn/form__submit-btn.css);
+@import url(../blocks/form/__submit-btn/_disabled/form__submit-btn_disabled.css);
+@import url(../blocks/form/__error/form__error.css);
+@import url(../blocks/form/__error/_visible/form__error_visible.css);
 
 @import url(../blocks/popup/__image-container/popup__image-container.css);
 @import url(../blocks/popup/__image-item/popup__image-item.css);

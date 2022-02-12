@@ -31,9 +31,27 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <button class="popup__close-btn popup__close-btn_type_profile" type="button" aria-label="Закрыть"></button>
-        <form class="form" name="profile-information">
-          <input type="text" placeholder="Имя" name="name" class="form__text form__text_type_name">
-          <input type="text" placeholder="О себе" name="about" class="form__text form__text_type_about">
+        <form class="form" name="profile-information" novalidate>
+          <input 
+            type="text" 
+            placeholder="Имя" 
+            name="name" 
+            class="form__text form__text_type_name"
+            required
+            minlength="2"
+            maxlength="40"
+            >
+          <span id="name-error" class="form__error"></span>
+          <input 
+            type="text" 
+            placeholder="О себе" 
+            name="about" 
+            class="form__text form__text_type_about"
+            required
+            minlength="2"
+            maxlength="200"
+            >
+          <span id="about-error" class="form__error"></span>
           <button type="submit" class="form__submit-btn">Сохранить</button>
         </form>
       </div>
@@ -42,9 +60,26 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <button class="popup__close-btn popup__close-btn_type_card" type="button" aria-label="Закрыть"></button>
-        <form class="form" name="new-place-card">
-          <input type="text" placeholder="Название" name="name" class="form__text form__text_type_place-title">
-          <input type="text" placeholder="Ссылка на картинку" name="about" class="form__text form__text_type_place-link">
+        <form class="form" name="new-place-card" novalidate>
+          <input 
+            type="text" 
+            placeholder="Название" 
+            name="place-title" 
+            class="form__text form__text_type_place-title"
+            required
+            minlength="2"
+            maxlength="30"
+            >
+          <span id="place-title-error" class="form__error"></span>
+          <input 
+            type="url"
+            placeholder="Ссылка на картинку" 
+            name="link" 
+            class="form__text form__text_type_place-link"
+            required
+            
+            >
+          <span id="link-error" class="form__error"></span>
           <button type="submit" class="form__submit-btn">Создать</button>
         </form>
       </div>
@@ -70,5 +105,6 @@
     </template>
   <script src="./scripts/data.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>
