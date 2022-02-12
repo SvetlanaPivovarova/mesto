@@ -44,7 +44,7 @@ function hideError(form, input, config) {       //функция скрытия 
     input.classList.remove(config.inputErrorClass);
     const errorElement = form.querySelector(`#${input.name}-error`);
     errorElement.textContent = '';
-    errorElement.classList.remove(congig.errorClass);
+    errorElement.classList.remove(config.errorClass);
 }
 
 function toggleButtonState(form, config) {      //функция дезактивации.активации кнопки отправки формы
