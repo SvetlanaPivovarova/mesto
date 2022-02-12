@@ -47,7 +47,7 @@ function hideError(form, input, config) {       //функция скрытия 
     errorElement.classList.remove(config.errorClass);
 }
 
-function toggleButtonState(form, config) {      //функция дезактивации.активации кнопки отправки формы
+function toggleButtonState(form, config) {      //функция дезактивации/активации кнопки отправки формы
     const buttonElement = form.querySelector(config.submitButtonSelector);
     buttonElement.disabled = !form.checkValidity();
     buttonElement.classList.toggle(config.inactiveButtonClass, !form.checkValidity());
