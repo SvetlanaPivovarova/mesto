@@ -1,4 +1,5 @@
 const buttonEditProfile = document.querySelector('.profile__edit-button');
+const popup = document.querySelector('.popup');
 const buttonCloseProfile = document.querySelector('.popup__close-btn_type_profile');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
@@ -30,6 +31,7 @@ function closePopup(item) {     //функция закрытия поп-ап
 
 function formSubmitUserHandler (evt) {      //функция отправки данных формы профиля
     evt.preventDefault();
+   // handlePopupClosing(evt);
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
     closePopup(popupProfile);
@@ -86,6 +88,31 @@ initialCards.forEach(item => {          //создать 6 первоначал�
   renderCard(item, cardsWrap)
 });
 
+//функция обработки закрытия модальных окон по нажатию на фон или клавишей esс
+function handlePopupClosing() {
+  const popups = Array.from(document.querySelectorAll('.popup'));
+  popups.forEach(popupElement => closePopopOverOverlay(popupElement));
+  popups.forEach(popupElement => closePopupByEsc(popupElement));
+}
+
+function closePopopOverOverlay(popupElement) {
+  popupElement.addEventListener ('click', function(event) {  
+    if (event.target === popupElement) { 
+        closePopup(popupElement);
+    } 
+  }); 
+}
+
+function closePopupByEsc(popupElement) {
+  document.addEventListener ('keydown', function(event) {
+    if (event.code === "Escape") { 
+        closePopup(popupElement); 
+    } 
+  }); 
+}
+
+handlePopupClosing();
+
 buttonEditProfile.addEventListener ('click', function() {  //слушатель для кнопки "редактировать профиль", открытие поп-ап редактирования профиля
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;  
@@ -103,5 +130,8 @@ buttonCloseAddCard.addEventListener ('click', function() {
 buttonCloseImage.addEventListener ('click', function() {
   closePopup(popupFullSizeImage);
 });
+
 formProfile.addEventListener('submit', formSubmitUserHandler); 
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
+
+
