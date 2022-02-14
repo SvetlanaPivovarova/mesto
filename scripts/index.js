@@ -5,6 +5,7 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
 const popupFullSizeImage = document.querySelector('.popup_type_image');
 const popupOpenedClass = 'popup_opened';
+const popupOpenedSelector = '.popup_opened';
 const formProfile = document.querySelector('[name="profile-information"]');
 const nameInput = formProfile.querySelector('.form__text_type_name'); 
 const jobInput = formProfile.querySelector('.form__text_type_about');
@@ -23,15 +24,23 @@ const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
 
 function openPopup(item) {  //функция открытия поп-ап
     item.classList.add(popupOpenedClass);
+    document.addEventListener('keydown', closePopupByEsc);
 };
 
 function closePopup(item) {     //функция закрытия поп-ап
     item.classList.remove(popupOpenedClass);
+    document.removeEventListener('keydown', closePopupByEsc);
+};
+
+function closePopupByEsc(event) {
+    if (event.code === "Escape") {
+      const popupElement = document.querySelector(popupOpenedSelector);
+      closePopup(popupElement); 
+    }
 };
 
 function formSubmitUserHandler (evt) {      //функция отправки данных формы профиля
     evt.preventDefault();
-   // handlePopupClosing(evt);
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
     closePopup(popupProfile);
@@ -92,7 +101,6 @@ initialCards.forEach(item => {          //создать 6 первоначал�
 function handlePopupClosing() {
   const popups = Array.from(document.querySelectorAll('.popup'));
   popups.forEach(popupElement => closePopopOverOverlay(popupElement));
-  popups.forEach(popupElement => closePopupByEsc(popupElement));
 }
 
 function closePopopOverOverlay(popupElement) {
@@ -103,13 +111,7 @@ function closePopopOverOverlay(popupElement) {
   }); 
 }
 
-function closePopupByEsc(popupElement) {
-  document.addEventListener ('keydown', function(event) {
-    if (event.code === "Escape") { 
-        closePopup(popupElement); 
-    } 
-  }); 
-}
+
 
 handlePopupClosing();
 
