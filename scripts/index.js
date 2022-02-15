@@ -41,8 +41,10 @@ function closePopupByEsc(event) {
 
 function formSubmitUserHandler (evt) {      //функция отправки данных формы профиля
     evt.preventDefault();
+
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
+    
     closePopup(popupProfile);
 };
 
@@ -74,6 +76,7 @@ const getCardElement = (item) => {                            //получить
   fullSizeImage.alt = item.name;
   openPopup(popupFullSizeImage);
   });
+
   return card;
 };
 
@@ -84,10 +87,12 @@ const renderCard = (item, wrap) => {     //добавление карточки
 
 const handleCardFormSubmit = (evt) => {   //форма для создания новой карточки пользователем
   evt.preventDefault();
+
   const cardUser = {
       name: cardInputTitle.value,
       link: cardInputLink.value
   };
+
   renderCard(cardUser, cardsWrap);          //вызвать функцию создания карточки, передать переменные card из формы и cardsWrap
   closePopup(popupCard);
   formNewPlace.reset();                   //очистить форму
@@ -100,6 +105,7 @@ initialCards.forEach(item => {          //создать 6 первоначал�
 //функция обработки закрытия модальных окон по нажатию на фон или клавишей esс
 function handlePopupClosing() {
   const popups = Array.from(document.querySelectorAll('.popup'));
+
   popups.forEach(popupElement => closePopopOverOverlay(popupElement));
 }
 
@@ -110,8 +116,6 @@ function closePopopOverOverlay(popupElement) {
     } 
   }); 
 }
-
-
 
 handlePopupClosing();
 
