@@ -17,12 +17,16 @@ function addFormListeners(form, config) {
     console.log(form, config);
 
     form.addEventListener('submit', handleSubmit);
-    form.addEventListener('input', () => setSubmitButtonState(form, config));
+  //  form.addEventListener('input', () => toggleButtonState(form, config));
 
     const inputs = [...form.querySelectorAll(config.inputSelector)];
-    inputs.forEach(input => input.addEventListener('input', () => handleField(form, input, config)));
+        inputs.forEach(input => input.addEventListener('input', () => {
+            toggleButtonState(form, config);
+            handleField(form, input, config);
+        }));
 
-    setSubmitButtonState(form, config);
+    toggleButtonState(form, config);
+    form.addEventListener('reset', () => toggleButtonStateAfterResetForm(form, config));
 }
 
 function handleSubmit(event) {
@@ -57,13 +61,19 @@ function hideError(form, input, config) {
     errorElement.classList.remove(config.errorClass);
 }
 
-function setSubmitButtonState(form, config) {
+function toggleButtonState(form, config) {
     const button = form.querySelector(config.submitButtonSelector);
 
     console.log(form.checkValidity());
 
     button.disabled = !form.checkValidity();
     button.classList.toggle(config.inactiveButtonClass, !form.checkValidity());
+}
+
+function toggleButtonStateAfterResetForm(form, config) {    //деактивация кнопки отправки формы после очистки полей формы
+    const buttonElement = form.querySelector(config.submitButtonSelector);
+    buttonElement.disabled = true;
+    buttonElement.classList.toggle(config.inactiveButtonClass);
 }
 
 enableValidation(formConfig);
