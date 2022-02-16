@@ -24,13 +24,29 @@ const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
 
 function openPopup(item) {  //функция открытия поп-ап
     item.classList.add(popupOpenedClass);
+    
     document.addEventListener('keydown', closePopupByEsc);
 };
 
 function closePopup(item) {     //функция закрытия поп-ап
     item.classList.remove(popupOpenedClass);
     document.removeEventListener('keydown', closePopupByEsc);
+    clearErrors(item);
 };
+
+function clearErrors(item) {    //функция, создающая массив полей для очистки ошибок валидации после закрытия модального окна
+  const inputList = [...item.querySelectorAll(inputSelector)];
+
+  inputList.forEach(inputElement => clearErrorsHandle(item, inputElement));
+}
+
+function clearErrorsHandle(item, inputElement) {    //функция очистки ошибок валидации при закрытии модального окна
+  const errorElement = item.querySelector(`#${inputElement.name}-error`);
+  
+  inputElement.classList.remove(inputErrorClass);
+  errorElement.textContent = '';
+  errorElement.classList.remove(errorClass);
+}
 
 function closePopupByEsc(event) {
     if (event.code === "Escape") {
@@ -41,10 +57,8 @@ function closePopupByEsc(event) {
 
 function formSubmitUserHandler (evt) {      //функция отправки данных формы профиля
     evt.preventDefault();
-
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
-    
     closePopup(popupProfile);
 };
 
@@ -92,7 +106,7 @@ const handleCardFormSubmit = (evt) => {   //форма для создания �
       name: cardInputTitle.value,
       link: cardInputLink.value
   };
-
+  
   renderCard(cardUser, cardsWrap);          //вызвать функцию создания карточки, передать переменные card из формы и cardsWrap
   closePopup(popupCard);
   formNewPlace.reset();                   //очистить форму
@@ -132,6 +146,7 @@ buttonAddCard.addEventListener ('click',function() {
 });
 buttonCloseAddCard.addEventListener ('click', function() {
   closePopup(popupCard);
+  formNewPlace.reset();
 });
 buttonCloseImage.addEventListener ('click', function() {
   closePopup(popupFullSizeImage);

@@ -1,13 +1,5 @@
-const formConfig = {
-    formSelector: '.form',
-    inputSelector: '.form__text',
-    inputErrorClass: 'form__text_type_error',
-    errorClass: 'form__error_visible',
-    submitButtonSelector: '.form__submit-btn',
-    inactiveButtonClass: 'form__submit-btn_disabled'
-}
-
-const {formSelector, inputSelector, inputErrorClass, errorClass, submitButtonSelector, inactiveButtonClass} = formConfig;
+//данные настроек валидации в виде объекта хранятся в data.js
+//в data.js выполнена деструктуризация объекта настроек
 
 function enableValidation() {
     const forms = [...document.querySelectorAll(formSelector)];
@@ -69,6 +61,7 @@ function hideError(form, input) {
     input.classList.remove(inputErrorClass);
     errorElement.textContent = '';
     errorElement.classList.remove(errorClass);
+    console.log(errorElement);
 }
 
-enableValidation(formConfig);
+enableValidation();
