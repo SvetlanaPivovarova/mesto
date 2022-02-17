@@ -68,11 +68,5 @@ function hideError(form, input, config) {
     errorElement.textContent = '';
     errorElement.classList.remove(config.errorClass);
 }
-
-//function clearErrors(form, input, config) {    //функция, создающая массив полей для очистки ошибок валидации после закрытия модального окна
-//    const inputList = [...item.querySelectorAll(inputSelector)];
-//  
-//    inputList.forEach(inputElement => hideError(form, input, config));
-//  }
-  
+ 
 enableValidation(formConfig);

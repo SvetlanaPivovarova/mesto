@@ -24,7 +24,6 @@ const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
 
 function openPopup(item) {  //функция открытия поп-ап
     item.classList.add(popupOpenedClass);
-    
     document.addEventListener('keydown', closePopupByEsc);
 };
 
