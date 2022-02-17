@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-//данные настроек валидации в виде объекта хранятся в data.js
-//в data.js выполнена деструктуризация объекта настроек
-=======
 const formConfig = {
     formSelector: '.form',
     inputSelector: '.form__text',
@@ -13,7 +9,6 @@ const formConfig = {
 
 function enableValidation(data) {
     const forms = [...document.querySelectorAll(data.formSelector)];
->>>>>>> parent of ac925e3... использовать деструктуризацию объекта в валидации
 
     forms.forEach(form => addFormListeners(form, data));
 }
@@ -71,12 +66,13 @@ function hideError(form, input, config) {
 
     input.classList.remove(config.inputErrorClass);
     errorElement.textContent = '';
-<<<<<<< HEAD
-    errorElement.classList.remove(errorClass);
-    console.log(errorElement);
-=======
     errorElement.classList.remove(config.errorClass);
->>>>>>> parent of ac925e3... использовать деструктуризацию объекта в валидации
 }
 
-enableValidation();
+//function clearErrors(form, input, config) {    //функция, создающая массив полей для очистки ошибок валидации после закрытия модального окна
+//    const inputList = [...item.querySelectorAll(inputSelector)];
+//  
+//    inputList.forEach(inputElement => hideError(form, input, config));
+//  }
+  
+enableValidation(formConfig);

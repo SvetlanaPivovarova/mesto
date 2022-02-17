@@ -25,14 +25,3 @@ const initialCards = [
     }
   ];
 
-  const formConfig = {        //данные настроек для валидации форм
-    formSelector: '.form',
-    inputSelector: '.form__text',
-    inputErrorClass: 'form__text_type_error',
-    errorClass: 'form__error_visible',
-    submitButtonSelector: '.form__submit-btn',
-    inactiveButtonClass: 'form__submit-btn_disabled'
-}
-
-//деструктуризация объекта настроек валидации для использования во вложенных функцияъ переменных
-const {formSelector, inputSelector, inputErrorClass, errorClass, submitButtonSelector, inactiveButtonClass} = formConfig;

@@ -31,22 +31,7 @@ function openPopup(item) {  //функция открытия поп-ап
 function closePopup(item) {     //функция закрытия поп-ап
     item.classList.remove(popupOpenedClass);
     document.removeEventListener('keydown', closePopupByEsc);
-    clearErrors(item);
 };
-
-function clearErrors(item) {    //функция, создающая массив полей для очистки ошибок валидации после закрытия модального окна
-  const inputList = [...item.querySelectorAll(inputSelector)];
-
-  inputList.forEach(inputElement => clearErrorsHandle(item, inputElement));
-}
-
-function clearErrorsHandle(item, inputElement) {    //функция очистки ошибок валидации при закрытии модального окна
-  const errorElement = item.querySelector(`#${inputElement.name}-error`);
-  
-  inputElement.classList.remove(inputErrorClass);
-  errorElement.textContent = '';
-  errorElement.classList.remove(errorClass);
-}
 
 function closePopupByEsc(event) {
     if (event.code === "Escape") {
@@ -146,7 +131,6 @@ buttonAddCard.addEventListener ('click',function() {
 });
 buttonCloseAddCard.addEventListener ('click', function() {
   closePopup(popupCard);
-  formNewPlace.reset();
 });
 buttonCloseImage.addEventListener ('click', function() {
   closePopup(popupFullSizeImage);
