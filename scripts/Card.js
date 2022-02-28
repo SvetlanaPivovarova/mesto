@@ -1,6 +1,5 @@
-import { openPopup, closePopup } from "./index.js";
+import { openPopup, closePopup, buttonCloseImage } from "./index.js";
 
-const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
 const fullSizeImage = document.querySelector('.popup__image-item');
 const fullSizeImageCaption = document.querySelector('.popup__title_type_image-caption');
 const popupFullSizeImage = document.querySelector('.popup_type_image');

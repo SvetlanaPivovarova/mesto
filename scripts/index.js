@@ -1,13 +1,11 @@
 import { initialCards } from "./data.js";
 import { Card } from "./Card.js";
 
-
 const buttonEditProfile = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
+//const popup = document.querySelector('.popup');
 const buttonCloseProfile = document.querySelector('.popup__close-btn_type_profile');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
-
 const popupOpenedClass = 'popup_opened';
 const popupOpenedSelector = '.popup_opened';
 const formProfile = document.querySelector('[name="profile-information"]');
@@ -19,10 +17,9 @@ const cardsWrap = document.querySelector('.elements');    // обертка дл
 const formNewPlace = document.querySelector('[name="new-place-card"]'); //выбрать форму добавления нового места
 const cardInputTitle = document.querySelector('.form__text_type_place-title'); //выбрать поле Название
 const cardInputLink = document.querySelector('.form__text_type_place-link');    //выбрать поле ссылка
-//const cardTemplate = document.querySelector('#card-template').content.querySelector('.card'); //выбрать элемент темплейта для создания карточки
 const buttonAddCard = document.querySelector('.profile__add-button');
 const buttonCloseAddCard = document.querySelector('.popup__close-btn_type_card');
-//const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
+const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
 
 function openPopup(item) {  //функция открытия поп-ап
     item.classList.add(popupOpenedClass);
@@ -48,46 +45,11 @@ function formSubmitUserHandler (evt) {      //функция отправки д
     closePopup(popupProfile);
 };
 
-
-
-initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
+const renderCard = (item, wrap) => {     //добавление карточки в начало списка
   const card = new Card(item, '.card-template-default');
-  // Создаём карточку и возвращаем наружу
   const cardElement = card.generateCard();
-
-  // Добавляем в DOM
-  cardsWrap.append(cardElement);
-}); 
-
-//const getCardElement = (item) => {                            //получить элемент для карточки
-//  const card = cardTemplate.cloneNode(true);
-//  const cardTitle = card.querySelector('.card__place-title');
-//  const cardImage = card.querySelector('.card__image');
-//  const cardLikeButton = card.querySelector('.card__like-icon');
-//  const cardDeleteButton = card.querySelector('.card__delete-icon');
-  
-//  cardLikeButton.addEventListener('click', handleLikeButton);
- // cardDeleteButton.addEventListener('click', handleDeleteButton);
-  
-//  cardTitle.textContent = item.name;     //наполнить содержимым - название
-//  cardImage.src = item.link;             //наполнить содержимым - ссылка
-//  cardImage.alt = item.name;             //наполнить содержимым - alt
-  
-//  cardImage.addEventListener('click', function() {
-//  fullSizeImage.src = item.link;
-//  fullSizeImageCaption.textContent = item.name;
- // fullSizeImage.alt = item.name;
-//  openPopup(popupFullSizeImage);
-//  });
-
-//  return card;
-//};
-
-//const renderCard = (item, wrap) => {     //добавление карточки в начало списка
- // const card = getCardElement(item);
- // wrap.prepend(card);
-//};
+  wrap.prepend(cardElement);
+};
 
 const handleCardFormSubmit = (evt) => {   //форма для создания новой карточки пользователем
   evt.preventDefault();
@@ -137,12 +99,9 @@ buttonAddCard.addEventListener ('click',function() {
 buttonCloseAddCard.addEventListener ('click', function() {
   closePopup(popupCard);
 });
-buttonCloseImage.addEventListener ('click', function() {
-  closePopup(popupFullSizeImage);
-});
 
 formProfile.addEventListener('submit', formSubmitUserHandler); 
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
 
 
-export {openPopup, closePopup};
+export {openPopup, closePopup, buttonCloseImage};
