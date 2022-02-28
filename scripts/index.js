@@ -1,9 +1,13 @@
+import { initialCards } from "./data.js";
+import { Card } from "./Card.js";
+
+
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const buttonCloseProfile = document.querySelector('.popup__close-btn_type_profile');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
-const popupFullSizeImage = document.querySelector('.popup_type_image');
+
 const popupOpenedClass = 'popup_opened';
 const popupOpenedSelector = '.popup_opened';
 const formProfile = document.querySelector('[name="profile-information"]');
@@ -15,12 +19,10 @@ const cardsWrap = document.querySelector('.elements');    // обертка дл
 const formNewPlace = document.querySelector('[name="new-place-card"]'); //выбрать форму добавления нового места
 const cardInputTitle = document.querySelector('.form__text_type_place-title'); //выбрать поле Название
 const cardInputLink = document.querySelector('.form__text_type_place-link');    //выбрать поле ссылка
-const cardTemplate = document.querySelector('#card-template').content.querySelector('.card'); //выбрать элемент темплейта для создания карточки
+//const cardTemplate = document.querySelector('#card-template').content.querySelector('.card'); //выбрать элемент темплейта для создания карточки
 const buttonAddCard = document.querySelector('.profile__add-button');
 const buttonCloseAddCard = document.querySelector('.popup__close-btn_type_card');
-const fullSizeImage = document.querySelector('.popup__image-item');
-const fullSizeImageCaption = document.querySelector('.popup__title_type_image-caption');
-const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
+//const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
 
 function openPopup(item) {  //функция открытия поп-ап
     item.classList.add(popupOpenedClass);
@@ -46,86 +48,7 @@ function formSubmitUserHandler (evt) {      //функция отправки д
     closePopup(popupProfile);
 };
 
-//const handleLikeButton = (e) => {
-//  e.target.classList.add('card__like-icon_active');
-//};
 
-//const handleDeleteButton = (e) => {
-//  e.target.closest('.card').remove();
-//};
-
-
-class Card {
-  constructor(data, cardSelector) {
-    this._name = data.name;
-    this._image = data.link;
-    this._cardSelector = cardSelector; // записали селектор в приватное поле
-    
-  }
-
-  _getTemplate() {
-    // забираем разметку из HTML и клонируем элемент
-    const cardElement = document
-    .querySelector(this._cardSelector)
-    .content
-    .querySelector('.card')
-    .cloneNode(true);
-    
-  // вернём DOM-элемент карточки
-    return cardElement;
-  }
-
-  generateCard() {
-    this._element = this._getTemplate();
-    this._cardDeleteButton = this._element.querySelector('.card__delete-icon');
-    this._likeButton = this._element.querySelector('.card__like-icon');
-    this._picture = this._element.querySelector('.card__image');
-    this._setEventListeners();
-  
-    // Добавим данные
-    this._element.querySelector('.card__place-title').textContent = this._name;
-    this._element.querySelector('.card__image').src = this._image;
-    this._element.querySelector('.card__image').alt = this._name;
-    
-    
-    // Вернём элемент наружу
-    return this._element;
-  } 
-  _setEventListeners() {
-    this._element.addEventListener('click', (e) => {
-      this._handleOpenPopup(e);
-    })
-    buttonCloseImage.addEventListener('click', () => {
-      this._handleClosePopup();
-    })
-    this._likeButton.addEventListener('click', (e) => {
-      this._handleLikeButton(e);
-    } );
-    this._cardDeleteButton.addEventListener('click', (e) => {
-      this._handleDeleteButton(e);
-    } );
-  }
-
-  _handleLikeButton(e) {
-    e.target.classList.add('card__like-icon_active');
-  }
-
-  _handleDeleteButton(e) {
-    e.target.closest('.card').remove();
-  };
-  
-  _handleOpenPopup(e) {
-    if (e.target === this._picture) {
-      fullSizeImage.src = this._image;
-      fullSizeImageCaption.textContent = this._name;
-      fullSizeImage.alt = this._name;
-      openPopup(popupFullSizeImage);
-    }
-  }
-  _handleClosePopup() {
-    closePopup(popupFullSizeImage);
-  }
-}
 
 initialCards.forEach((item) => {
   // Создадим экземпляр карточки
@@ -222,3 +145,4 @@ formProfile.addEventListener('submit', formSubmitUserHandler);
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
 
 
+export {openPopup, closePopup};
