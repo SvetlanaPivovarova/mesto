@@ -46,42 +46,125 @@ function formSubmitUserHandler (evt) {      //функция отправки д
     closePopup(popupProfile);
 };
 
-const handleLikeButton = (e) => {
-  e.target.classList.add('card__like-icon_active');
-};
+//const handleLikeButton = (e) => {
+//  e.target.classList.add('card__like-icon_active');
+//};
 
-const handleDeleteButton = (e) => {
-  e.target.closest('.card').remove();
-};
+//const handleDeleteButton = (e) => {
+//  e.target.closest('.card').remove();
+//};
 
-const getCardElement = (item) => {                            //получить элемент для карточки
-  const card = cardTemplate.cloneNode(true);
-  const cardTitle = card.querySelector('.card__place-title');
-  const cardImage = card.querySelector('.card__image');
-  const cardLikeButton = card.querySelector('.card__like-icon');
-  const cardDeleteButton = card.querySelector('.card__delete-icon');
+
+class Card {
+  constructor(data, cardSelector) {
+    this._name = data.name;
+    this._image = data.link;
+    this._cardSelector = cardSelector; // записали селектор в приватное поле
+    
+  }
+
+  _getTemplate() {
+    // забираем разметку из HTML и клонируем элемент
+    const cardElement = document
+    .querySelector(this._cardSelector)
+    .content
+    .querySelector('.card')
+    .cloneNode(true);
+    
+  // вернём DOM-элемент карточки
+    return cardElement;
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+    this._cardDeleteButton = this._element.querySelector('.card__delete-icon');
+    this._likeButton = this._element.querySelector('.card__like-icon');
+    this._picture = this._element.querySelector('.card__image');
+    this._setEventListeners();
   
-  cardLikeButton.addEventListener('click', handleLikeButton);
-  cardDeleteButton.addEventListener('click', handleDeleteButton);
-  
-  cardTitle.textContent = item.name;     //наполнить содержимым - название
-  cardImage.src = item.link;             //наполнить содержимым - ссылка
-  cardImage.alt = item.name;             //наполнить содержимым - alt
-  
-  cardImage.addEventListener('click', function() {
-  fullSizeImage.src = item.link;
-  fullSizeImageCaption.textContent = item.name;
-  fullSizeImage.alt = item.name;
-  openPopup(popupFullSizeImage);
-  });
+    // Добавим данные
+    this._element.querySelector('.card__place-title').textContent = this._name;
+    this._element.querySelector('.card__image').src = this._image;
+    this._element.querySelector('.card__image').alt = this._name;
+    
+    
+    // Вернём элемент наружу
+    return this._element;
+  } 
+  _setEventListeners() {
+    this._element.addEventListener('click', (e) => {
+      this._handleOpenPopup(e);
+    })
+    buttonCloseImage.addEventListener('click', () => {
+      this._handleClosePopup();
+    })
+    this._likeButton.addEventListener('click', (e) => {
+      this._handleLikeButton(e);
+    } );
+    this._cardDeleteButton.addEventListener('click', (e) => {
+      this._handleDeleteButton(e);
+    } );
+  }
 
-  return card;
-};
+  _handleLikeButton(e) {
+    e.target.classList.add('card__like-icon_active');
+  }
 
-const renderCard = (item, wrap) => {     //добавление карточки в начало списка
-  const card = getCardElement(item);
-  wrap.prepend(card);
-};
+  _handleDeleteButton(e) {
+    e.target.closest('.card').remove();
+  };
+  
+  _handleOpenPopup(e) {
+    if (e.target === this._picture) {
+      fullSizeImage.src = this._image;
+      fullSizeImageCaption.textContent = this._name;
+      fullSizeImage.alt = this._name;
+      openPopup(popupFullSizeImage);
+    }
+  }
+  _handleClosePopup() {
+    closePopup(popupFullSizeImage);
+  }
+}
+
+initialCards.forEach((item) => {
+  // Создадим экземпляр карточки
+  const card = new Card(item, '.card-template-default');
+  // Создаём карточку и возвращаем наружу
+  const cardElement = card.generateCard();
+
+  // Добавляем в DOM
+  cardsWrap.append(cardElement);
+}); 
+
+//const getCardElement = (item) => {                            //получить элемент для карточки
+//  const card = cardTemplate.cloneNode(true);
+//  const cardTitle = card.querySelector('.card__place-title');
+//  const cardImage = card.querySelector('.card__image');
+//  const cardLikeButton = card.querySelector('.card__like-icon');
+//  const cardDeleteButton = card.querySelector('.card__delete-icon');
+  
+//  cardLikeButton.addEventListener('click', handleLikeButton);
+ // cardDeleteButton.addEventListener('click', handleDeleteButton);
+  
+//  cardTitle.textContent = item.name;     //наполнить содержимым - название
+//  cardImage.src = item.link;             //наполнить содержимым - ссылка
+//  cardImage.alt = item.name;             //наполнить содержимым - alt
+  
+//  cardImage.addEventListener('click', function() {
+//  fullSizeImage.src = item.link;
+//  fullSizeImageCaption.textContent = item.name;
+ // fullSizeImage.alt = item.name;
+//  openPopup(popupFullSizeImage);
+//  });
+
+//  return card;
+//};
+
+//const renderCard = (item, wrap) => {     //добавление карточки в начало списка
+ // const card = getCardElement(item);
+ // wrap.prepend(card);
+//};
 
 const handleCardFormSubmit = (evt) => {   //форма для создания новой карточки пользователем
   evt.preventDefault();
