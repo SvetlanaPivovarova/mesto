@@ -29,10 +29,10 @@ export class FormValidator {
     }
     _handleField(input) {
         if (input.validity.valid) {
-            this._hideError(this._form, input, this._config);
+            this._hideError(input);
         }
         else {
-            this._showError(this._form, input, this._config);
+            this._showError(input);
         }
     }
     _toggleButtonStateAfterResetForm() {    //деактивация кнопки отправки формы после очистки полей формы
@@ -48,13 +48,13 @@ export class FormValidator {
                 this._handleField(input);
             }));
     
-        this._form._addEventListener('submit', _handleSubmit);
+        this._form.addEventListener('submit', this._handleSubmit);
     
-        this._toggleButtonState(form, config);
+        this._toggleButtonState();
         this._form.addEventListener('reset', () => this._toggleButtonStateAfterResetForm());
     }
     
     enableValidation() {
-        this._form._addFormListeners();
+        this._addFormListeners();
     }
 }
