@@ -1,5 +1,24 @@
 import { initialCards } from "./data.js";
 import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidators.js";
+
+const formConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__text',
+  inputErrorClass: 'form__text_type_error',
+  errorClass: 'form__error_visible',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__submit-btn_disabled'
+}
+
+const formProfile = document.querySelector('[name="profile-information"]');
+const formNewPlace = document.querySelector('[name="new-place-card"]'); //выбрать форму добавления нового места
+
+const formProfileValidator = new FormValidator(formConfig, formProfile);
+const formNewPlaceValidator = new FormValidator(formConfig, formNewPlace);
+
+formProfileValidator.enableValidation();
+formNewPlaceValidator.enableValidation();
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 //const popup = document.querySelector('.popup');
@@ -8,13 +27,13 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
 const popupOpenedClass = 'popup_opened';
 const popupOpenedSelector = '.popup_opened';
-const formProfile = document.querySelector('[name="profile-information"]');
+
 const nameInput = formProfile.querySelector('.form__text_type_name'); 
 const jobInput = formProfile.querySelector('.form__text_type_about');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession'); 
 const cardsWrap = document.querySelector('.elements');    // обертка для карточек
-const formNewPlace = document.querySelector('[name="new-place-card"]'); //выбрать форму добавления нового места
+
 const cardInputTitle = document.querySelector('.form__text_type_place-title'); //выбрать поле Название
 const cardInputLink = document.querySelector('.form__text_type_place-link');    //выбрать поле ссылка
 const buttonAddCard = document.querySelector('.profile__add-button');
