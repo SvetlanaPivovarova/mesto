@@ -1,5 +1,24 @@
 import { initialCards } from "./data.js";
 import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
+const formConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__text',
+  inputErrorClass: 'form__text_type_error',
+  errorClass: 'form__error_visible',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__submit-btn_disabled'
+}
+
+const editProfileForm = document.querySelector('.form__profile-information');
+const newPlaceForm = document.querySelector('.form__new-place-card');
+
+const editProfileFormValidator = new FormValidator(formConfig, editProfileForm);
+const newPlaceFormValidator = new FormValidator(formConfig, newPlaceForm);
+
+editProfileFormValidator.enableValidation();
+newPlaceFormValidator.enableValidation();
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 //const popup = document.querySelector('.popup');
