@@ -13,7 +13,6 @@ class Card {
     }
   
     _getTemplate() {
-      // забрать разметку из HTML и клонируем элемент
       const cardElement = document
       .querySelector(this._cardSelector)
       .content

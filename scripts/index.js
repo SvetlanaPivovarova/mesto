@@ -1,20 +1,12 @@
-import { initialCards } from "./data.js";
+import { initialCards, formConfig } from "./data.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
-
-const formConfig = {
-  formSelector: '.form',
-  inputSelector: '.form__text',
-  inputErrorClass: 'form__text_type_error',
-  errorClass: 'form__error_visible',
-  submitButtonSelector: '.form__submit-btn',
-  inactiveButtonClass: 'form__submit-btn_disabled'
-}
 
 //формы
 const formProfile = document.querySelector('[name="profile-information"]');
 const formNewPlace = document.querySelector('[name="new-place-card"]'); //выбрать форму добавления нового места
 
+//создать экземпляр класса FormValidator для каждой формы
 const formProfileValidator = new FormValidator(formConfig, formProfile);
 const formNewPlaceValidator = new FormValidator(formConfig, formNewPlace);
 
@@ -45,12 +37,14 @@ const cardInputLink = document.querySelector('.form__text_type_place-link');    
 // обертка для карточек
 const cardsWrap = document.querySelector('.elements');    
 
-function openPopup(item) {  //функция открытия поп-ап
+//функция открытия поп-ап
+function openPopup(item) {  
     item.classList.add(popupOpenedClass);
     document.addEventListener('keydown', closePopupByEsc);
 };
 
-function closePopup(item) {     //функция закрытия поп-ап
+//функции закрытия поп-ап
+function closePopup(item) {     
     item.classList.remove(popupOpenedClass);
     document.removeEventListener('keydown', closePopupByEsc);
 };
@@ -62,20 +56,23 @@ function closePopupByEsc(event) {
     }
 };
 
-function formSubmitUserHandler (evt) {      //функция отправки данных формы профиля
+//функция отправки данных формы профиля
+function formSubmitUserHandler (evt) {      
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
     closePopup(popupProfile);
 };
 
-const renderCard = (item, wrap) => {     //добавление карточки в начало списка
+//добавление карточки в начало списка
+const renderCard = (item, wrap) => {     
   const card = new Card(item, '.card-template-default');
   const cardElement = card.generateCard();
   wrap.prepend(cardElement);
 };
 
-const handleCardFormSubmit = (evt) => {   //форма для создания новой карточки пользователем
+//форма для создания новой карточки пользователем
+const handleCardFormSubmit = (evt) => {   
   evt.preventDefault();
 
   const cardUser = {
@@ -126,6 +123,5 @@ buttonCloseAddCard.addEventListener ('click', function() {
 
 formProfile.addEventListener('submit', formSubmitUserHandler); 
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
-
 
 export {openPopup, closePopup, buttonCloseImage};
