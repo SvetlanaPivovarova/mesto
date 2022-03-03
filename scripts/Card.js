@@ -33,7 +33,7 @@ class Card {
     
       // добавить данные
       this._element.querySelector('.card__place-title').textContent = this._name;
-      this._element.querySelector('.card__image').src = this._image;
+      this._picture.src = this._image;
       this._element.querySelector('.card__image').alt = this._name;
       
       // вурнуть элемент наружу
@@ -42,7 +42,7 @@ class Card {
 
     //приватный метод установки слушателей на элементы внутри карточки
     _setEventListeners() {
-      this._element.addEventListener('click', (e) => {
+      this._picture.addEventListener('click', (e) => {
         this._handleOpenPopup(e);
       });
       this._likeButton.addEventListener('click', (e) => {
@@ -57,7 +57,7 @@ class Card {
     }
   
     _handleLikeButton(e) {
-      e.target.classList.add('card__like-icon_active');
+      e.target.classList.toggle('card__like-icon_active');
     }
   
     _handleDeleteButton(e) {

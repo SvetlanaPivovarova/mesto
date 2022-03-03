@@ -57,7 +57,7 @@ function closePopupByEsc(event) {
 };
 
 //функция отправки данных формы профиля
-function formSubmitUserHandler (evt) {      
+function handleProfileFormSubmit (evt) {      
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
@@ -121,7 +121,7 @@ buttonCloseAddCard.addEventListener ('click', function() {
   closePopup(popupCard);
 });
 
-formProfile.addEventListener('submit', formSubmitUserHandler); 
+formProfile.addEventListener('submit', handleProfileFormSubmit); 
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
 
 export {openPopup, closePopup, buttonCloseImage};
