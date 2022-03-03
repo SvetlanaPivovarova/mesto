@@ -64,10 +64,16 @@ function handleProfileFormSubmit (evt) {
     closePopup(popupProfile);
 };
 
-//добавление карточки в начало списка
-const renderCard = (item, wrap) => {     
+//создание карточки
+function createCard(item) {
   const card = new Card(item, '.card-template-default');
   const cardElement = card.generateCard();
+  return cardElement;
+}
+
+//добавление карточки в начало списка
+const renderCard = (item, wrap) => {     
+  const cardElement = createCard(item);
   wrap.prepend(cardElement);
 };
 
