@@ -9,10 +9,8 @@ export class FormValidator {
     }
 
     _toggleButtonState() {
-        const button = this._form.querySelector(this._config.submitButtonSelector);
-    
-        button.disabled = !this._form.checkValidity();
-        button.classList.toggle(this._config.inactiveButtonClass, !this._form.checkValidity());
+        this._button.disabled = !this._form.checkValidity();
+        this._button.classList.toggle(this._config.inactiveButtonClass, !this._form.checkValidity());
     }
 
     _showError(input) {
@@ -40,24 +38,24 @@ export class FormValidator {
         }
     }
 
-    _toggleButtonStateAfterResetForm() {    //деактивация кнопки отправки формы после очистки полей формы
-        const buttonElement = this._form.querySelector(this._config.submitButtonSelector);
-    
-        buttonElement.disabled = true;
-        buttonElement.classList.toggle(this._config.inactiveButtonClass);
+    _disableButton() {    //деактивация кнопки отправки формы после очистки полей формы
+        this._button.disabled = true;
+        this._button.classList.add(this._config.inactiveButtonClass);
     }
 
     _addFormListeners() {
+        this._button = this._form.querySelector(this._config.submitButtonSelector);
         this._inputs = [...this._form.querySelectorAll(this._config.inputSelector)];
-            this._inputs.forEach(input => input.addEventListener('input', () => {
-                this._toggleButtonState();
-                this._handleField(input);
-            }));
+            
+        this._inputs.forEach(input => input.addEventListener('input', () => {   
+            this._toggleButtonState();
+            this._handleField(input); 
+        }));
     
         this._form.addEventListener('submit', this._handleSubmit);
     
         this._toggleButtonState();
-        this._form.addEventListener('reset', () => this._toggleButtonStateAfterResetForm());
+        this._form.addEventListener('reset', () => this._disableButton());
     }
     
     enableValidation() {
