@@ -1,4 +1,4 @@
-import { openPopup, closePopup, buttonCloseImage } from "./index.js";
+import { openPopup } from "./index.js";
 
 const fullSizeImage = document.querySelector('.popup__image-item');
 const fullSizeImageCaption = document.querySelector('.popup__title_type_image-caption');
@@ -51,9 +51,6 @@ class Card {
       this._cardDeleteButton.addEventListener('click', (e) => {
         this._handleDeleteButton(e);
       });
-      buttonCloseImage.addEventListener('click', () => {
-        this._handleClosePopup();
-      });
     }
   
     _handleLikeButton(e) {
@@ -71,10 +68,6 @@ class Card {
         fullSizeImage.alt = this._name;
         openPopup(popupFullSizeImage);
       }
-    }
-
-    _handleClosePopup() {
-      closePopup(popupFullSizeImage);
     }
   }
 

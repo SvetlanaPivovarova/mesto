@@ -23,6 +23,7 @@ const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
 //DOM-элементы модальных окон
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
+const popupFullSizeImage = document.querySelector('.popup_type_image');
 const popupOpenedClass = 'popup_opened';
 const popupOpenedSelector = '.popup_opened';
 
@@ -126,8 +127,10 @@ buttonAddCard.addEventListener ('click',function() {
 buttonCloseAddCard.addEventListener ('click', function() {
   closePopup(popupCard);
 });
-
+buttonCloseImage.addEventListener('click', () => {
+  closePopup(popupFullSizeImage);
+});
 formProfile.addEventListener('submit', handleProfileFormSubmit); 
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
 
-export {openPopup, closePopup, buttonCloseImage};
+export {openPopup};
