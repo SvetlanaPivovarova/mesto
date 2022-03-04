@@ -3,11 +3,29 @@ import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 
 //создать экземпляр класса FormValidator для каждой формы
-const formProfileValidator = new FormValidator(formConfig, formProfile);
-const formNewPlaceValidator = new FormValidator(formConfig, formNewPlace);
+//const formProfileValidator = new FormValidator(formConfig, formProfile);
+//const formNewPlaceValidator = new FormValidator(formConfig, formNewPlace);
 
-formProfileValidator.enableValidation();
-formNewPlaceValidator.enableValidation();
+//formProfileValidator.enableValidation();
+//formNewPlaceValidator.enableValidation();
+
+//Создать объект, где будут храниться экземпляры валидаторов всех форм
+const formValidators = {}
+
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute('name');
+
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(formConfig);
 
 //функция открытия поп-ап
 function openPopup(item) {  
