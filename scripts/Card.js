@@ -28,7 +28,7 @@ class Card {
       // добавить данные
       this._element.querySelector('.card__place-title').textContent = this._name;
       this._picture.src = this._image;
-      this._element.querySelector('.card__image').alt = this._name;
+      this._picture.alt = this._name;
       
       // вурнуть элемент наружу
       return this._element;
