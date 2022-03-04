@@ -2,13 +2,6 @@ import { initialCards, formConfig } from "./data.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 
-//создать экземпляр класса FormValidator для каждой формы
-//const formProfileValidator = new FormValidator(formConfig, formProfile);
-//const formNewPlaceValidator = new FormValidator(formConfig, formNewPlace);
-
-//formProfileValidator.enableValidation();
-//formNewPlaceValidator.enableValidation();
-
 //Создать объект, где будут храниться экземпляры валидаторов всех форм
 const formValidators = {}
 
@@ -85,21 +78,6 @@ initialCards.forEach(item => {          //создать 6 первоначал�
   renderCard(item, cardsWrap)
 });
 
-//функция обработки закрытия модальных окон по нажатию на фон или клавишей esс
-function handlePopupClosing() {
-  const popups = Array.from(document.querySelectorAll('.popup'));
-
-  popups.forEach(popupElement => closePopopOverOverlay(popupElement));
-}
-
-function closePopopOverOverlay(popupElement) {
-  popupElement.addEventListener ('click', function(event) {  
-    if (event.target === popupElement) { 
-        closePopup(popupElement);
-    } 
-  }); 
-}
-
 function handleCardClick(name, link) {
   fullSizeImage.src = link;
   fullSizeImageCaption.textContent = name;
@@ -107,25 +85,27 @@ function handleCardClick(name, link) {
   openPopup(popupFullSizeImage);
 }
 
-handlePopupClosing();
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains(popupOpenedClass)) {
+            closePopup(popup);
+        }
+        if (evt.target.classList.contains('popup__close-btn')) {
+          closePopup(popup);
+        }
+    })
+})
 
 buttonEditProfile.addEventListener ('click', function() {  //слушатель для кнопки "редактировать профиль", открытие поп-ап редактирования профиля
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;  
     jobInput.value = profileProfession.textContent;
 });
-buttonCloseProfile.addEventListener ('click', function() {
-    closePopup(popupProfile);
-});
+
 buttonAddCard.addEventListener ('click',function() {
     openPopup(popupCard);
 });
-buttonCloseAddCard.addEventListener ('click', function() {
-  closePopup(popupCard);
-});
-buttonCloseImage.addEventListener('click', () => {
-  closePopup(popupFullSizeImage);
-});
+
 formProfile.addEventListener('submit', handleProfileFormSubmit); 
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
 
