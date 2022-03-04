@@ -10,9 +10,6 @@ const formNewPlace = document.querySelector('[name="new-place-card"]'); //выб
 const formProfileValidator = new FormValidator(formConfig, formProfile);
 const formNewPlaceValidator = new FormValidator(formConfig, formNewPlace);
 
-formProfileValidator.enableValidation();
-formNewPlaceValidator.enableValidation();
-
 //кнопки
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonCloseProfile = document.querySelector('.popup__close-btn_type_profile');
@@ -24,6 +21,8 @@ const buttonCloseImage = document.querySelector('.popup__close-btn_type_image');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
 const popupFullSizeImage = document.querySelector('.popup_type_image');
+const fullSizeImage = document.querySelector('.popup__image-item');
+const fullSizeImageCaption = document.querySelector('.popup__title_type_image-caption');
 const popupOpenedClass = 'popup_opened';
 const popupOpenedSelector = '.popup_opened';
 
@@ -37,6 +36,9 @@ const cardInputLink = document.querySelector('.form__text_type_place-link');    
 
 // обертка для карточек
 const cardsWrap = document.querySelector('.elements');    
+
+formProfileValidator.enableValidation();
+formNewPlaceValidator.enableValidation();
 
 //функция открытия поп-ап
 function openPopup(item) {  
@@ -67,7 +69,7 @@ function handleProfileFormSubmit (evt) {
 
 //создание карточки
 function createCard(item) {
-  const card = new Card(item, '.card-template-default');
+  const card = new Card(item, '.card-template-default', handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -109,6 +111,13 @@ function closePopopOverOverlay(popupElement) {
         closePopup(popupElement);
     } 
   }); 
+}
+
+function handleCardClick(name, link) {
+  fullSizeImage.src = link;
+  fullSizeImageCaption.textContent = name;
+  fullSizeImage.alt = name;
+  openPopup(popupFullSizeImage);
 }
 
 handlePopupClosing();

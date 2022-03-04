@@ -1,15 +1,9 @@
-import { openPopup } from "./index.js";
-
-const fullSizeImage = document.querySelector('.popup__image-item');
-const fullSizeImageCaption = document.querySelector('.popup__title_type_image-caption');
-const popupFullSizeImage = document.querySelector('.popup_type_image');
-
-
 class Card {
-    constructor(data, cardSelector) {
+    constructor(data, cardSelector, handleCardClick) {
       this._name = data.name;
       this._image = data.link;
       this._cardSelector = cardSelector;
+      this._handleCardClick = handleCardClick;
     }
   
     _getTemplate() {
@@ -42,8 +36,8 @@ class Card {
 
     //приватный метод установки слушателей на элементы внутри карточки
     _setEventListeners() {
-      this._picture.addEventListener('click', (e) => {
-        this._handleOpenPopup(e);
+      this._picture.addEventListener('click', () => {
+        this._handleCardClick(this._name, this._image);
       });
       this._likeButton.addEventListener('click', (e) => {
         this._handleLikeButton(e);
@@ -60,15 +54,6 @@ class Card {
     _handleDeleteButton(e) {
       e.target.closest('.card').remove();
     };
-    
-    _handleOpenPopup(e) {
-      if (e.target === this._picture) {
-        fullSizeImage.src = this._image;
-        fullSizeImageCaption.textContent = this._name;
-        fullSizeImage.alt = this._name;
-        openPopup(popupFullSizeImage);
-      }
-    }
   }
 
   export {Card};
