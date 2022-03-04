@@ -108,5 +108,3 @@ buttonAddCard.addEventListener ('click',function() {
 
 formProfile.addEventListener('submit', handleProfileFormSubmit); 
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
-
-export {openPopup};
