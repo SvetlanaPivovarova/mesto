@@ -1,6 +1,14 @@
 import { initialCards, formConfig } from "./data.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import { formProfile, formNewPlace,
+        buttonAddCard, buttonEditProfile,
+        popupProfile, popupCard, popupFullSizeImage,
+        fullSizeImage, fullSizeImageCaption,
+        popupOpenedClass, popupOpenedSelector, popups,
+        nameInput, jobInput, profileName,
+        profileProfession, cardInputTitle, cardInputLink,
+        cardsWrap } from "../utils/constans.js";
 
 //Создать объект, где будут храниться экземпляры валидаторов всех форм
 const formValidators = {}
