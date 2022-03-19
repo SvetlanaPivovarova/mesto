@@ -9,6 +9,7 @@ import { formProfile, formNewPlace,
         nameInput, jobInput, profileName,
         profileProfession, cardInputTitle, cardInputLink,
         cardsWrap } from "../utils/constans.js";
+import {Section} from "./Section.js";
 
 //Создать объект, где будут храниться экземпляры валидаторов всех форм
 const formValidators = {}
@@ -27,6 +28,20 @@ const enableValidation = (config) => {
 };
 
 enableValidation(formConfig);
+
+//создать экземпляр класса Section
+const initialCardList = new Section({
+    data: initialCards,
+    renderer: (item) =>{
+        const card = new Card(item, '.card-template-default', handleCardClick);
+        const cardElement = card.generateCard();
+        initialCardList.addItem(cardElement);
+    }
+    }, '.elements'
+);
+
+//создать 6 первоначальных карточек, данные хранятся в массиве initialCards
+initialCardList.renderItems();
 
 //функция открытия поп-ап
 function openPopup(item) {  
@@ -82,9 +97,10 @@ const handleCardFormSubmit = (evt) => {
   formNewPlace.reset();                   //очистить форму
 };
 
-initialCards.forEach(item => {          //создать 6 первоначальных карточек, данные хранятся в массиве initialCards
-  renderCard(item, cardsWrap)
-});
+//initialCards.forEach(item => {
+//  renderCard(item, cardsWrap)
+//});
+
 
 function handleCardClick(name, link) {
   fullSizeImage.src = link;
