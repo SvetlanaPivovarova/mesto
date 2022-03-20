@@ -3,13 +3,16 @@ import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 import { formProfile, formNewPlace,
         buttonAddCard, buttonEditProfile,
-        popupProfile, popupCard, popupFullSizeImage,
+
         fullSizeImage, fullSizeImageCaption,
         popupOpenedClass, popupOpenedSelector, popups,
         nameInput, jobInput, profileName,
         profileProfession, cardInputTitle, cardInputLink,
         cardsWrap } from "../utils/constans.js";
 import {Section} from "./Section.js";
+import {Popup} from "./Popup.js";
+import {PopupWithForm} from "./PopupWithForm.js";
+import {PopupWithImage} from "./PopupWithImage.js";
 
 //Создать объект, где будут храниться экземпляры валидаторов всех форм
 const formValidators = {}
@@ -43,31 +46,33 @@ const initialCardList = new Section({
 //создать 6 первоначальных карточек, данные хранятся в массиве initialCards
 initialCardList.renderItems();
 
+
+
 //функция открытия поп-ап
-function openPopup(item) {  
-    item.classList.add(popupOpenedClass);
-    document.addEventListener('keydown', closePopupByEsc);
-};
+//function openPopup(item) {
+//    item.classList.add(popupOpenedClass);
+//    document.addEventListener('keydown', closePopupByEsc);
+//};
 
 //функции закрытия поп-ап
-function closePopup(item) {     
-    item.classList.remove(popupOpenedClass);
-    document.removeEventListener('keydown', closePopupByEsc);
-};
+//function closePopup(item) {
+//    item.classList.remove(popupOpenedClass);
+//    document.removeEventListener('keydown', closePopupByEsc);
+//};
 
-function closePopupByEsc(event) {
-    if (event.code === "Escape") {
-      const popupElement = document.querySelector(popupOpenedSelector);
-      closePopup(popupElement); 
-    }
-};
+//function closePopupByEsc(event) {
+//    if (event.code === "Escape") {
+ //     const popupElement = document.querySelector(popupOpenedSelector);
+ //     closePopup(popupElement);
+ //   }
+//};
 
 //функция отправки данных формы профиля
 function handleProfileFormSubmit (evt) {      
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
-    closePopup(popupProfile);
+    popupProfile.close();
 };
 
 //форма для создания новой карточки пользователем
@@ -89,37 +94,47 @@ const handleCardFormSubmit = (evt) => {
   );
 
     cardUserList.renderItems();
-    closePopup(popupCard);
-  formNewPlace.reset();                   //очистить форму
+    popupCard.close();
+  //formNewPlace.reset();                   //очистить форму
 };
 
 function handleCardClick(name, link) {
   fullSizeImage.src = link;
   fullSizeImageCaption.textContent = name;
   fullSizeImage.alt = name;
-  openPopup(popupFullSizeImage);
+  popupFullSizeImage.open();
 }
 
-popups.forEach((popup) => {
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains(popupOpenedClass)) {
-            closePopup(popup);
-        }
-        if (evt.target.classList.contains('popup__close-btn')) {
-          closePopup(popup);
-        }
-    })
-})
+//popups.forEach((popup) => {
+ //   popup.addEventListener('mousedown', (evt) => {
+ //       if (evt.target.classList.contains(popupOpenedClass)) {
+  //          closePopup(popup);
+  //      }
+  //      if (evt.target.classList.contains('popup__close-btn')) {
+  //        closePopup(popup);
+  //      }
+  //  })
+//})
 
 buttonEditProfile.addEventListener ('click', function() {  //слушатель для кнопки "редактировать профиль", открытие поп-ап редактирования профиля
-    openPopup(popupProfile);
+    popupProfile.open();
     nameInput.value = profileName.textContent;  
     jobInput.value = profileProfession.textContent;
 });
 
 buttonAddCard.addEventListener ('click',function() {
-    openPopup(popupCard);
+    popupCard.open();
 });
 
 formProfile.addEventListener('submit', handleProfileFormSubmit); 
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
+
+
+//создать для каждого попапа свой экземпляр класса PopupWithForm
+const popupProfile = new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
+const popupCard = new PopupWithForm('.popup_type_card', handleCardFormSubmit);
+const popupFullSizeImage = new PopupWithImage(handleCardClick);
+
+popupProfile.setEventListeners();
+popupCard.setEventListeners();
+popupFullSizeImage.setEventListeners();
