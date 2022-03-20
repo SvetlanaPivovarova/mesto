@@ -70,19 +70,6 @@ function handleProfileFormSubmit (evt) {
     closePopup(popupProfile);
 };
 
-//создание карточки
-//function createCard(item) {
-//  const card = new Card(item, '.card-template-default', handleCardClick);
- // const cardElement = card.generateCard();
-//  return cardElement;
-//}
-
-//добавление карточки в начало списка
-//const renderCard = (item, wrap) => {
-//  const cardElement = createCard(item);
-//  wrap.prepend(cardElement);
-//};
-
 //форма для создания новой карточки пользователем
 const handleCardFormSubmit = (evt) => {   
   evt.preventDefault();
@@ -101,17 +88,10 @@ const handleCardFormSubmit = (evt) => {
   }, '.elements'
   );
 
-  //renderCard(cardUser, cardsWrap);          //вызвать функцию создания карточки, передать переменные card из формы и cardsWrap
     cardUserList.renderItems();
     closePopup(popupCard);
   formNewPlace.reset();                   //очистить форму
 };
-
-
-//initialCards.forEach(item => {
-//  renderCard(item, cardsWrap)
-//});
-
 
 function handleCardClick(name, link) {
   fullSizeImage.src = link;
