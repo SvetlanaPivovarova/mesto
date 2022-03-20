@@ -3,7 +3,6 @@ import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 import { formProfile, formNewPlace,
         buttonAddCard, buttonEditProfile,
-
         fullSizeImage, fullSizeImageCaption,
         popupOpenedClass, popupOpenedSelector, popups,
         nameInput, jobInput, profileName,
@@ -46,27 +45,6 @@ const initialCardList = new Section({
 //создать 6 первоначальных карточек, данные хранятся в массиве initialCards
 initialCardList.renderItems();
 
-
-
-//функция открытия поп-ап
-//function openPopup(item) {
-//    item.classList.add(popupOpenedClass);
-//    document.addEventListener('keydown', closePopupByEsc);
-//};
-
-//функции закрытия поп-ап
-//function closePopup(item) {
-//    item.classList.remove(popupOpenedClass);
-//    document.removeEventListener('keydown', closePopupByEsc);
-//};
-
-//function closePopupByEsc(event) {
-//    if (event.code === "Escape") {
- //     const popupElement = document.querySelector(popupOpenedSelector);
- //     closePopup(popupElement);
- //   }
-//};
-
 //функция отправки данных формы профиля
 function handleProfileFormSubmit (evt) {      
     evt.preventDefault();
@@ -95,7 +73,6 @@ const handleCardFormSubmit = (evt) => {
 
     cardUserList.renderItems();
     popupCard.close();
-  //formNewPlace.reset();                   //очистить форму
 };
 
 function handleCardClick(name, link) {
@@ -104,17 +81,6 @@ function handleCardClick(name, link) {
   fullSizeImage.alt = name;
   popupFullSizeImage.open();
 }
-
-//popups.forEach((popup) => {
- //   popup.addEventListener('mousedown', (evt) => {
- //       if (evt.target.classList.contains(popupOpenedClass)) {
-  //          closePopup(popup);
-  //      }
-  //      if (evt.target.classList.contains('popup__close-btn')) {
-  //        closePopup(popup);
-  //      }
-  //  })
-//})
 
 buttonEditProfile.addEventListener ('click', function() {  //слушатель для кнопки "редактировать профиль", открытие поп-ап редактирования профиля
     popupProfile.open();
@@ -128,7 +94,6 @@ buttonAddCard.addEventListener ('click',function() {
 
 formProfile.addEventListener('submit', handleProfileFormSubmit); 
 formNewPlace.addEventListener('submit', handleCardFormSubmit);
-
 
 //создать для каждого попапа свой экземпляр класса PopupWithForm
 const popupProfile = new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
