@@ -1,15 +1,15 @@
-import { initialCards, formConfig } from "./data.js";
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
+import { initialCards, formConfig } from "../utils/data.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
 import { buttonAddCard, buttonEditProfile,
         fullSizeImage, fullSizeImageCaption,
         cardInputTitle, cardInputLink,
-         } from "../utils/constans.js";
-import {Section} from "./Section.js";
-import {Popup} from "./Popup.js";
-import {PopupWithForm} from "./PopupWithForm.js";
-import {PopupWithImage} from "./PopupWithImage.js";
-import {UserInfo} from "./UserInfo.js";
+         } from "../utils/constants.js";
+import {Section} from "../components/Section.js";
+import {Popup} from "../components/Popup.js";
+import {PopupWithForm} from "../components/PopupWithForm.js";
+import {PopupWithImage} from "../components/PopupWithImage.js";
+import {UserInfo} from "../components/UserInfo.js";
 
 //Создать объект, где будут храниться экземпляры валидаторов всех форм
 const formValidators = {}
