@@ -14,10 +14,10 @@ export const popupOpenedSelector = '.popup_opened';
 export const popups = Array.from(document.querySelectorAll('.popup'));
 
 //DOM-элементы форм
-export const nameInput = formProfile.querySelector('.form__text_type_name'); 
+export const nameInput = formProfile.querySelector('.form__text_type_name');
 export const jobInput = formProfile.querySelector('.form__text_type_about');
-export const profileName = document.querySelector('.profile__name');
-export const profileProfession = document.querySelector('.profile__profession'); 
+//export const profileName = document.querySelector('.profile__name');
+//export const profileProfession = document.querySelector('.profile__profession');
 export const cardInputTitle = document.querySelector('.form__text_type_place-title'); //выбрать поле Название
 export const cardInputLink = document.querySelector('.form__text_type_place-link');    //выбрать поле ссылка
 

@@ -14,7 +14,13 @@ export class PopupWithForm extends Popup {
         this._form = this._popupElement.querySelector(PopupWithForm.selectors.formSelector);
     }
     _getInputValues() {
-        this._inputs = [...this._form.querySelectorAll(PopupWithForm.selectors.inputSelector).value]; //массив всех инпутов
+        const inputValues = {};
+        this._inputs = [...this._form.querySelectorAll(PopupWithForm.selectors.inputSelector)];
+        this._inputs.forEach((inputElement) => {
+            const inputName = inputElement.getAttribute('name');
+            inputValues[inputName] = inputElement.value;
+        });
+        return inputValues;
         //const cardInputTitle = this._form.querySelector(PopupWithForm.selectors.inputTitleSelector); //выбрать поле Название
         //const cardInputLink = this._form.querySelector(PopupWithForm.selectors.inputLinkSelector);    //выбрать поле ссылка
     }

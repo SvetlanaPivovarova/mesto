@@ -1,5 +1,4 @@
 import {Popup} from "./Popup.js";
-import {formNewPlace, fullSizeImage, fullSizeImageCaption} from "../utils/constans.js";
 
 export class PopupWithImage extends Popup {
     static selectors = {

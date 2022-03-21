@@ -5,13 +5,15 @@ import { formProfile, formNewPlace,
         buttonAddCard, buttonEditProfile,
         fullSizeImage, fullSizeImageCaption,
         popupOpenedClass, popupOpenedSelector, popups,
-        nameInput, jobInput, profileName,
-        profileProfession, cardInputTitle, cardInputLink,
+        //nameInput, jobInput, profileName,
+        //profileProfession,
+    cardInputTitle, cardInputLink,
         cardsWrap } from "../utils/constans.js";
 import {Section} from "./Section.js";
 import {Popup} from "./Popup.js";
 import {PopupWithForm} from "./PopupWithForm.js";
 import {PopupWithImage} from "./PopupWithImage.js";
+import {UserInfo} from "./UserInfo.js";
 
 //Создать объект, где будут храниться экземпляры валидаторов всех форм
 const formValidators = {}
@@ -45,11 +47,19 @@ const initialCardList = new Section({
 //создать 6 первоначальных карточек, данные хранятся в массиве initialCards
 initialCardList.renderItems();
 
+const userInfoProfile = new UserInfo({
+    nameSelector: '.profile__name',
+    infoSelector: '.profile__profession',
+    inputNameSelector: '.form__text_type_name',
+    inputJobSelector: '.form__text_type_about'
+});
+
 //функция отправки данных формы профиля
 function handleProfileFormSubmit (evt) {      
     evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileProfession.textContent = jobInput.value;
+    //profileName.textContent = nameInput.value;
+    //profileProfession.textContent = jobInput.value;
+    userInfoProfile.setUserInfo();
     popupProfile.close();
 };
 
@@ -84,16 +94,17 @@ function handleCardClick(name, link) {
 
 buttonEditProfile.addEventListener ('click', function() {  //слушатель для кнопки "редактировать профиль", открытие поп-ап редактирования профиля
     popupProfile.open();
-    nameInput.value = profileName.textContent;  
-    jobInput.value = profileProfession.textContent;
+    userInfoProfile.getUserInfo();
+    //nameInput.value = profileName.textContent;
+    //jobInput.value = profileProfession.textContent;
 });
 
 buttonAddCard.addEventListener ('click',function() {
     popupCard.open();
 });
 
-formProfile.addEventListener('submit', handleProfileFormSubmit); 
-formNewPlace.addEventListener('submit', handleCardFormSubmit);
+//formProfile.addEventListener('submit', handleProfileFormSubmit);
+//formNewPlace.addEventListener('submit', handleCardFormSubmit);
 
 //создать для каждого попапа свой экземпляр класса PopupWithForm
 const popupProfile = new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
@@ -103,3 +114,6 @@ const popupFullSizeImage = new PopupWithImage(handleCardClick);
 popupProfile.setEventListeners();
 popupCard.setEventListeners();
 popupFullSizeImage.setEventListeners();
+
+console.log(popupProfile._getInputValues());
+console.log(popupCard._getInputValues());
