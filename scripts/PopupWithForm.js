@@ -2,11 +2,8 @@ import {Popup} from "./Popup.js";
 
 export class PopupWithForm extends Popup {
     static selectors = {
-        //popupSelector: '.',
         formSelector: '.form',
         inputSelector: '.form__text',
-       // inputTitleSelector: '.form__text_type_place-title',
-       // inputLinkSelector: '.form__text_type_place-link'
     }
     constructor(popupSelector, handleCardFormSubmit) {
         super(popupSelector);
@@ -21,8 +18,6 @@ export class PopupWithForm extends Popup {
             inputValues[inputName] = inputElement.value;
         });
         return inputValues;
-        //const cardInputTitle = this._form.querySelector(PopupWithForm.selectors.inputTitleSelector); //выбрать поле Название
-        //const cardInputLink = this._form.querySelector(PopupWithForm.selectors.inputLinkSelector);    //выбрать поле ссылка
     }
     setEventListeners() {
         super.setEventListeners();
