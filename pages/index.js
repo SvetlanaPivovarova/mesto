@@ -60,26 +60,26 @@ function handleProfileFormSubmit (evt) {
 };
 
 //форма для создания новой карточки пользователем
-const handleCardFormSubmit = (evt) => {   
-  evt.preventDefault();
+//const handleCardFormSubmit = (evt) => {
+ // evt.preventDefault();
 
-  const cardUser = [{
-      name: cardInputTitle.value,
-      link: cardInputLink.value
-  }];
-  const cardUserList = new Section({
-      data: cardUser,
-      renderer:  (item) =>{
-          const card = new Card(item, '.card-template-default', handleCardClick);
-          const cardElement = card.generateCard();
-          cardUserList.addItem(cardElement);
-      }
-  }, '.elements'
-  );
-
-    cardUserList.renderItems();
-    popupCard.close();
-};
+ // const cardUser = [{
+ //     name: cardInputTitle.value,
+ //     link: cardInputLink.value
+ // }];
+ // const cardUserList = new Section({
+   //   data: cardUser,
+   //   renderer:  (item) =>{
+    //      const card = new Card(item, '.card-template-default', handleCardClick);
+    //      const cardElement = card.generateCard();
+    //      cardUserList.addItem(cardElement);
+    //  }
+  //}, '.elements'
+  //);
+//
+   // cardUserList.renderItems();
+   // popupCard.close();
+//};
 
 //функция открывания попап с картинкой при клике на карточку
 function handleCardClick(name, link) {
@@ -90,9 +90,30 @@ function handleCardClick(name, link) {
 }
 
 //создать для каждого попапа свой экземпляр класса PopupWithForm
-const popupProfile = new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
+const popupProfile = new PopupWithForm({
+    popupSelector: '.popup_type_profile',
+    handleFormSubmit: handleProfileFormSubmit
+});
 
-const popupCard = new PopupWithForm('.popup_type_card', handleCardFormSubmit);
+const popupCard = new PopupWithForm({
+    popupSelector: '.popup_type_card',
+    handleFormSubmit:  (cardUser) => {
+        const cardUserList = new Section({
+                data: [cardUser],
+                renderer:  (item) =>{
+                    const card = new Card(item, '.card-template-default', handleCardClick);
+                    const cardElement = card.generateCard();
+                    cardUserList.addItem(cardElement);
+                }
+            }, '.elements'
+        );
+
+        cardUserList.renderItems();
+        popupCard.close();
+    }
+});
+
+console.log(popupCard._getInputValues());
 
 const popupFullSizeImage = new PopupWithImage(handleCardClick);
 
