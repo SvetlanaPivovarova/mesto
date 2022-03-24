@@ -4,6 +4,7 @@ import { initialCards, formConfig } from "../utils/data.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { buttonAddCard, buttonEditProfile,
+        inputUser, inputAbout,
         fullSizeImage, fullSizeImageCaption,
         cardInputTitle, cardInputLink,
          } from "../utils/constants.js";
@@ -50,8 +51,8 @@ initialCardList.renderItems();
 const userInfoProfile = new UserInfo({
     nameSelector: '.profile__name',
     infoSelector: '.profile__profession',
-    inputNameSelector: '.form__text_type_name',
-    inputJobSelector: '.form__text_type_about'
+  //  inputNameSelector: '.form__text_type_name',
+  //  inputJobSelector: '.form__text_type_about'
 });
 
 //функция открывания попап с картинкой при клике на карточку
@@ -66,7 +67,8 @@ function handleCardClick(name, link) {
 const popupProfile = new PopupWithForm({
     popupSelector: '.popup_type_profile',
     handleFormSubmit: (userInfo) => {
-        userInfoProfile.setUserInfo();
+        console.log(userInfo);
+        userInfoProfile.setUserInfo(userInfo);
         popupProfile.close();
     }
 });
@@ -96,7 +98,8 @@ const popupFullSizeImage = new PopupWithImage(handleCardClick);
 //слушатели
 buttonEditProfile.addEventListener ('click', function() {
     popupProfile.open();
-    userInfoProfile.getUserInfo();
+    inputUser.value = userInfoProfile.getUserInfo().user;
+    inputAbout.value = userInfoProfile.getUserInfo().about;
 });
 
 buttonAddCard.addEventListener ('click',function() {

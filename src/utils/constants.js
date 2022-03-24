@@ -9,3 +9,6 @@ export const fullSizeImageCaption = document.querySelector('.popup__title_type_i
 //DOM-элементы форм
 export const cardInputTitle = document.querySelector('.form__text_type_place-title'); //выбрать поле Название
 export const cardInputLink = document.querySelector('.form__text_type_place-link');    //выбрать поле ссылка
+
+export const inputUser = document.querySelector('.form__text_type_name');
+export const inputAbout = document.querySelector('.form__text_type_about');
