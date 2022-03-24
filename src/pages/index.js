@@ -29,21 +29,25 @@ const enableValidation = (config) => {
 
 enableValidation(formConfig);
 
-//создать экземпляр класса Section
+//функция создания карточки
+function createCard(item) {
+    const card = new Card(item, '.card-template-default', handleCardClick);
+    const cardElement = card.generateCard();
+    return cardElement;
+}
+
+//создать экземпляр класса Section и набор первоначальных карточек
 const initialCardList = new Section({
     data: initialCards,
     renderer: (item) =>{
-        const card = new Card(item, '.card-template-default', handleCardClick);
-        const cardElement = card.generateCard();
+        const cardElement = createCard(item);
         initialCardList.addItem(cardElement);
     }
     }, '.elements'
 );
-
-//создать 6 первоначальных карточек, данные хранятся в массиве initialCards
 initialCardList.renderItems();
 
-//создать экземпляр класса UserInfo, который
+//создать экземпляр класса UserInfo
 const userInfoProfile = new UserInfo({
     nameSelector: '.profile__name',
     infoSelector: '.profile__profession',
@@ -67,17 +71,9 @@ const popupProfile = new PopupWithForm({
 const popupCard = new PopupWithForm({
     popupSelector: '.popup_type_card',
     handleFormSubmit:  (cardUser) => {
-        const cardUserList = new Section({
-                data: [cardUser],
-                renderer:  (item) =>{
-                    const card = new Card(item, '.card-template-default', handleCardClick);
-                    const cardElement = card.generateCard();
-                    cardUserList.addItem(cardElement);
-                }
-            }, '.elements'
-        );
+        const cardElement = createCard(cardUser);
 
-        cardUserList.renderItems();
+        initialCardList.addItem(cardElement);
         popupCard.close();
     }
 });
