@@ -4,12 +4,9 @@ import { initialCards, formConfig } from "../utils/data.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { buttonAddCard, buttonEditProfile,
-        inputUser, inputAbout,
-        fullSizeImage, fullSizeImageCaption,
-        cardInputTitle, cardInputLink,
+        inputUser, inputAbout
          } from "../utils/constants.js";
 import {Section} from "../components/Section.js";
-import {Popup} from "../components/Popup.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {UserInfo} from "../components/UserInfo.js";
@@ -47,19 +44,13 @@ const initialCardList = new Section({
 initialCardList.renderItems();
 
 //создать экземпляр класса UserInfo, который
-//отвечает за управление отображением информации о пользователе на странице
 const userInfoProfile = new UserInfo({
     nameSelector: '.profile__name',
     infoSelector: '.profile__profession',
-  //  inputNameSelector: '.form__text_type_name',
-  //  inputJobSelector: '.form__text_type_about'
 });
 
 //функция открывания попап с картинкой при клике на карточку
 function handleCardClick(name, link) {
-  //fullSizeImage.src = link;
-  //fullSizeImageCaption.textContent = name;
-  //fullSizeImage.alt = name;
   popupFullSizeImage.open(name, link);
 }
 
@@ -90,8 +81,6 @@ const popupCard = new PopupWithForm({
         popupCard.close();
     }
 });
-
-console.log(popupCard._getInputValues());
 
 const popupFullSizeImage = new PopupWithImage(handleCardClick);
 
