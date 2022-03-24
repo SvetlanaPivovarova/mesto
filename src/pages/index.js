@@ -56,10 +56,10 @@ const userInfoProfile = new UserInfo({
 
 //функция открывания попап с картинкой при клике на карточку
 function handleCardClick(name, link) {
-  fullSizeImage.src = link;
-  fullSizeImageCaption.textContent = name;
-  fullSizeImage.alt = name;
-  popupFullSizeImage.open();
+  //fullSizeImage.src = link;
+  //fullSizeImageCaption.textContent = name;
+  //fullSizeImage.alt = name;
+  popupFullSizeImage.open(name, link);
 }
 
 //создать для каждого попапа свой экземпляр класса PopupWithForm
