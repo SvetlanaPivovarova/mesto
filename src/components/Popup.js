@@ -18,8 +18,7 @@ export class Popup {
     }
     _handleEscClose = (event) => {
         if (event.code === "Escape") {
-            const popupElement = document.querySelector(Popup.selectors.popupOpenedSelector);
-            this.close(popupElement);
+            this.close();
         }
     }
     setEventListeners() {
