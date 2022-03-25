@@ -58,11 +58,10 @@ function handleCardClick(name, link) {
   popupFullSizeImage.open(name, link);
 }
 
-//создать для каждого попапа свой экземпляр класса PopupWithForm
+//создать для каждого попапа свой экземпляр класса PopupWithForm, PopupWithImage
 const popupProfile = new PopupWithForm({
     popupSelector: '.popup_type_profile',
     handleFormSubmit: (userInfo) => {
-        console.log(userInfo);
         userInfoProfile.setUserInfo(userInfo);
         popupProfile.close();
     }
@@ -78,13 +77,14 @@ const popupCard = new PopupWithForm({
     }
 });
 
-const popupFullSizeImage = new PopupWithImage(handleCardClick);
+const popupFullSizeImage = new PopupWithImage('.popup_type_image');
 
 //слушатели
 buttonEditProfile.addEventListener ('click', function() {
     popupProfile.open();
-    inputUser.value = userInfoProfile.getUserInfo().user;
-    inputAbout.value = userInfoProfile.getUserInfo().about;
+    const {user, about} = userInfoProfile.getUserInfo()
+    inputUser.value = user;
+    inputAbout.value = about;
 });
 
 buttonAddCard.addEventListener ('click',function() {
