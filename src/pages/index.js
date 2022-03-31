@@ -1,6 +1,6 @@
 import '../pages/index.css';
 
-import { initialCards, formConfig } from "../utils/data.js";
+import { formConfig } from "../utils/data.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { buttonAddCard, buttonEditProfile,
@@ -10,6 +10,7 @@ import {Section} from "../components/Section.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {UserInfo} from "../components/UserInfo.js";
+import {Api} from "../components/Api.js";
 
 //Создать объект, где будут храниться экземпляры валидаторов всех форм
 const formValidators = {}
@@ -31,21 +32,31 @@ enableValidation(formConfig);
 
 //функция создания карточки
 function createCard(item) {
-    const card = new Card(item, '.card-template-default', handleCardClick);
+    const card = new Card(item, '.card-template-default', handleCardClick, api);
     const cardElement = card.generateCard();
     return cardElement;
 }
 
-//создать экземпляр класса Section и набор первоначальных карточек
-const initialCardList = new Section({
-    data: initialCards,
-    renderer: (item) =>{
-        const cardElement = createCard(item);
-        initialCardList.addItem(cardElement);
+const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
+    headers: {
+        authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8'
     }
-    }, '.elements'
-);
-initialCardList.renderItems();
+});
+
+api.getInitialCards().then((cards) => {
+    const initialCardList = new Section({
+            data: cards,
+            renderer: (item) =>{
+                const cardElement = createCard(item);
+                initialCardList.addItem(cardElement);
+            }
+        }, '.elements'
+    );
+    initialCardList.renderItems();
+    //return initialCardList;
+})
 
 //создать экземпляр класса UserInfo
 const userInfoProfile = new UserInfo({
@@ -96,3 +107,24 @@ popupProfile.setEventListeners();
 popupCard.setEventListeners();
 
 popupFullSizeImage.setEventListeners();
+
+//const api = new Api({
+//    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-38',
+ //   headers: {
+ //       authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
+ //       'Content-Type': 'application/json'
+ //   }
+//});
+
+
+
+//создать экземпляр класса Section и набор первоначальных карточек
+fetch('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
+    headers: {
+        authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4'
+    }
+})
+    .then(res => res.json())
+    .then((result) => {
+        console.log(result);
+    });
