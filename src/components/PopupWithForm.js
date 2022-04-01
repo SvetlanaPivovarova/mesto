@@ -27,8 +27,10 @@ export class PopupWithForm extends Popup {
             console.log(this._getInputValues());
             this._api.createNewCard(this._getInputValues()).then((res) => {
                 this._handleFormSubmit(res);
+            });
+            this._api.editProfile(this._getInputValues()).then((res) => {
+                this._handleFormSubmit(res);
             })
-
 
             console.log({
                 name: this._getInputValues().name,

@@ -12,7 +12,7 @@ export class Api {
             throw 'Ошибка'
         })
             .then((result) => {
-                console.log(result);
+                //console.log(result);
                 return result;
             })
             .catch((err) => {
@@ -41,10 +41,26 @@ export class Api {
         return this._makeRequest(promise);
    }
 
-    deleteCard(id) {
+   deleteCard(id) {
         const promise = fetch((`${this._url}/${id}`), {
             method: 'DELETE',
             headers: this._headers
+        });
+        return this._makeRequest(promise);
+    }
+
+    editProfile(changedUser) {
+        const promise = fetch((this._url), {
+            method: 'PATCH',
+            headers: {
+                authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({
+                name: changedUser.name,
+                about: changedUser.about
+            })
         });
         return this._makeRequest(promise);
     }

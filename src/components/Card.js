@@ -1,10 +1,10 @@
 class Card {
-    constructor(data, cardSelector, handleCardClick) {
+    constructor(data, cardSelector, handleCardClick, api) {
       this._name = data.name;
       this._image = data.link;
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
-      //this._api = api;
+      this._api = api;
     }
   
     _getTemplate() {
@@ -48,6 +48,7 @@ class Card {
       });
       this._cardDeleteButton.addEventListener('click', (e) => {
         this._handleDeleteButton(e);
+
       });
     }
   

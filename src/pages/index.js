@@ -56,7 +56,6 @@ api.getInitialCards().then((cards) => {
     );
     initialCardList.renderItems(cards);
 
-
     const popupCard = new PopupWithForm({
         popupSelector: '.popup_type_card',
         handleFormSubmit:  (cardUser) => {
@@ -74,34 +73,41 @@ api.getInitialCards().then((cards) => {
     });
 });
 
+const apiProfile = new Api('https://mesto.nomoreparties.co/v1/cohort-38/users/me', {
+    headers: {
+        authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8'
+    }
+});
 
-
-//const apiProfile = new Api('https://mesto.nomoreparties.co/v1/cohort-38/users/me', {
-//    headers: {
-//        authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
-//        'Accept': 'application/json',
-//        'Content-Type': 'application/json; charset=utf-8'
-//    }
-//});
-
-//apiProfile.getInitialCards().then((info) => {
-//    console.log(info);
+apiProfile.getInitialCards().then((info) => {
+    console.log(info);
     //создать для каждого попапа свой экземпляр класса PopupWithForm, PopupWithImage
-   // const popupProfile = new PopupWithForm({
-    //    popupSelector: '.popup_type_profile',
-    //    handleFormSubmit: (info) => {
-    //        userInfoProfile.setUserInfo(info);
-     //       popupProfile.close();
-    //    }
-    //});
- //   return popupProfile;
-//})
+    const popupProfile = new PopupWithForm({
+        popupSelector: '.popup_type_profile',
+        handleFormSubmit: (info) => {
+            userInfoProfile.setUserInfo(info);
+            popupProfile.close();
+        }
+    }, api);
+    //return popupProfile;
+
+    buttonEditProfile.addEventListener ('click', function() {
+        popupProfile.open();
+        //const {name, about} = userInfoProfile.getUserInfo()
+        inputUser.value = info.name;
+        inputAbout.value = info.about;
+    });
+
+    popupProfile.setEventListeners();
+})
 
 //создать экземпляр класса UserInfo
 const userInfoProfile = new UserInfo({
     nameSelector: '.profile__name',
     infoSelector: '.profile__profession',
-});
+}, apiProfile);
 
 //функция открывания попап с картинкой при клике на карточку
 function handleCardClick(name, link) {
@@ -109,13 +115,13 @@ function handleCardClick(name, link) {
 }
 
 //создать для каждого попапа свой экземпляр класса PopupWithForm, PopupWithImage
-const popupProfile = new PopupWithForm({
-    popupSelector: '.popup_type_profile',
-    handleFormSubmit: (userInfo) => {
-        userInfoProfile.setUserInfo(userInfo);
-        popupProfile.close();
-    }
-});
+//const popupProfile = new PopupWithForm({
+  //  popupSelector: '.popup_type_profile',
+  //  handleFormSubmit: (userInfo) => {
+  //      userInfoProfile.setUserInfo(userInfo);
+  //      popupProfile.close();
+  //  }
+//}, api);
 
 //const popupCard = new PopupWithForm({
 //    popupSelector: '.popup_type_card',
@@ -130,16 +136,10 @@ const popupProfile = new PopupWithForm({
 const popupFullSizeImage = new PopupWithImage('.popup_type_image');
 
 //слушатели
-buttonEditProfile.addEventListener ('click', function() {
-    popupProfile.open();
-    const {user, about} = userInfoProfile.getUserInfo()
-    inputUser.value = user;
-    inputAbout.value = about;
-});
 
 
 
-popupProfile.setEventListeners();
+
 
 
 
