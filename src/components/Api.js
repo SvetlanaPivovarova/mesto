@@ -25,7 +25,7 @@ export class Api {
         return this._makeRequest(promise);
     }
 
-   createNewCard(name, link) {
+   createNewCard(newCard) {
         const promise = fetch((this._url), {
             method: 'POST',
             headers: {
@@ -33,7 +33,10 @@ export class Api {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json; charset=utf-8'
             },
-            body: JSON.stringify({name, link})
+            body: JSON.stringify({
+                name: newCard.name,
+                link: newCard.link
+            })
         });
         return this._makeRequest(promise);
    }

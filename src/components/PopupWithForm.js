@@ -5,12 +5,12 @@ export class PopupWithForm extends Popup {
         formSelector: '.form',
         inputSelector: '.form__text',
     }
-    constructor({ popupSelector, handleFormSubmit }) {
+    constructor({ popupSelector, handleFormSubmit}, api) {
         super(popupSelector);
         this._handleFormSubmit = handleFormSubmit;
         this._form = this._popupElement.querySelector(PopupWithForm.selectors.formSelector);
         this._inputList = this._form.querySelectorAll(PopupWithForm.selectors.inputSelector);
-        //this._api = api;
+        this._api = api;
     }
     _getInputValues() {
         this._inputValues = {};
@@ -24,7 +24,16 @@ export class PopupWithForm extends Popup {
 
             // добавим вызов функции _handleFormSubmit
             // передадим ей объект — результат работы _getInputValues
-            this._handleFormSubmit(this._getInputValues());
+            console.log(this._getInputValues());
+            this._api.createNewCard(this._getInputValues()).then((res) => {
+                this._handleFormSubmit(res);
+            })
+
+
+            console.log({
+                name: this._getInputValues().name,
+                link: this._getInputValues().link
+        });
         });
     }
     close() {

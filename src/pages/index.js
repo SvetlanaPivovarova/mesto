@@ -64,8 +64,8 @@ api.getInitialCards().then((cards) => {
 
             initialCardList.addItem(cardElement);
             popupCard.close();
-        }
-    });
+        },
+    }, api);
 
     popupCard.setEventListeners();
 
