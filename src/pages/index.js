@@ -1,6 +1,6 @@
 import '../pages/index.css';
 
-import { formConfig } from "../utils/data.js";
+import {formConfig, initialCards} from "../utils/data.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { buttonAddCard, buttonEditProfile,
@@ -47,16 +47,55 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
 
 api.getInitialCards().then((cards) => {
     const initialCardList = new Section({
-            data: cards,
+            //data: cards,
             renderer: (item) =>{
                 const cardElement = createCard(item);
                 initialCardList.addItem(cardElement);
             }
         }, '.elements'
     );
-    initialCardList.renderItems();
-    //return initialCardList;
-})
+    initialCardList.renderItems(cards);
+
+
+    const popupCard = new PopupWithForm({
+        popupSelector: '.popup_type_card',
+        handleFormSubmit:  (cardUser) => {
+            const cardElement = createCard(cardUser);
+
+            initialCardList.addItem(cardElement);
+            popupCard.close();
+        }
+    });
+
+    popupCard.setEventListeners();
+
+    buttonAddCard.addEventListener ('click',function() {
+        popupCard.open();
+    });
+});
+
+
+
+//const apiProfile = new Api('https://mesto.nomoreparties.co/v1/cohort-38/users/me', {
+//    headers: {
+//        authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
+//        'Accept': 'application/json',
+//        'Content-Type': 'application/json; charset=utf-8'
+//    }
+//});
+
+//apiProfile.getInitialCards().then((info) => {
+//    console.log(info);
+    //создать для каждого попапа свой экземпляр класса PopupWithForm, PopupWithImage
+   // const popupProfile = new PopupWithForm({
+    //    popupSelector: '.popup_type_profile',
+    //    handleFormSubmit: (info) => {
+    //        userInfoProfile.setUserInfo(info);
+     //       popupProfile.close();
+    //    }
+    //});
+ //   return popupProfile;
+//})
 
 //создать экземпляр класса UserInfo
 const userInfoProfile = new UserInfo({
@@ -78,15 +117,15 @@ const popupProfile = new PopupWithForm({
     }
 });
 
-const popupCard = new PopupWithForm({
-    popupSelector: '.popup_type_card',
-    handleFormSubmit:  (cardUser) => {
-        const cardElement = createCard(cardUser);
+//const popupCard = new PopupWithForm({
+//    popupSelector: '.popup_type_card',
+//    handleFormSubmit:  (cardUser) => {
+//        const cardElement = createCard(cardUser);
 
-        initialCardList.addItem(cardElement);
-        popupCard.close();
-    }
-});
+//        initialCardList.addItem(cardElement);
+//        popupCard.close();
+//    }
+//});
 
 const popupFullSizeImage = new PopupWithImage('.popup_type_image');
 
@@ -98,13 +137,11 @@ buttonEditProfile.addEventListener ('click', function() {
     inputAbout.value = about;
 });
 
-buttonAddCard.addEventListener ('click',function() {
-    popupCard.open();
-});
+
 
 popupProfile.setEventListeners();
 
-popupCard.setEventListeners();
+
 
 popupFullSizeImage.setEventListeners();
 
