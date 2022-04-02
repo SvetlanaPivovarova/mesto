@@ -24,6 +24,13 @@ export class Api {
         const promise = fetch(this._url, this._headers);
         return this._makeRequest(promise);
     }
+    getProfile() {
+        const promise = fetch((this._url), {
+            method: 'GET',
+            headers: this._headers,
+        });
+        return this._makeRequest(promise);
+    }
 
    createNewCard(newCard) {
         const promise = fetch((this._url), {
@@ -49,17 +56,28 @@ export class Api {
         return this._makeRequest(promise);
     }
 
-    editProfile(changedUser) {
+    editProfile(newUser) {
         const promise = fetch((this._url), {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: newUser.name,
+                about: newUser.about
+            })
+        });
+        console.log(newUser);
+        return this._makeRequest(promise);
+    }
+    edit(newUser) {
+        const promise = fetch('https://mesto.nomoreparties.co/v1/cohort-38/users/me', {
             method: 'PATCH',
             headers: {
                 authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
-                'Accept': 'application/json',
-                'Content-Type': 'application/json; charset=utf-8'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: changedUser.name,
-                about: changedUser.about
+                name: newUser.user,
+                about: newUser.about
             })
         });
         return this._makeRequest(promise);

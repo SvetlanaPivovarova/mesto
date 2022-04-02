@@ -24,18 +24,17 @@ export class PopupWithForm extends Popup {
 
             // добавим вызов функции _handleFormSubmit
             // передадим ей объект — результат работы _getInputValues
-            console.log(this._getInputValues());
+            //console.log(this._getInputValues());
             this._api.createNewCard(this._getInputValues()).then((res) => {
                 this._handleFormSubmit(res);
             });
-            this._api.editProfile(this._getInputValues()).then((res) => {
+            console.log(this._getInputValues());
+            this._api.edit(this._getInputValues()).then((res) => {
                 this._handleFormSubmit(res);
+                console.log(res);
             })
 
-            console.log({
-                name: this._getInputValues().name,
-                link: this._getInputValues().link
-        });
+
         });
     }
     close() {

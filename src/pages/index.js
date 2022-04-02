@@ -46,6 +46,7 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
 });
 
 api.getInitialCards().then((cards) => {
+    //console.log(cards);
     const initialCardList = new Section({
             //data: cards,
             renderer: (item) =>{
@@ -82,16 +83,16 @@ const apiProfile = new Api('https://mesto.nomoreparties.co/v1/cohort-38/users/me
 });
 
 apiProfile.getInitialCards().then((info) => {
-    console.log(info);
+
     //создать для каждого попапа свой экземпляр класса PopupWithForm, PopupWithImage
     const popupProfile = new PopupWithForm({
         popupSelector: '.popup_type_profile',
         handleFormSubmit: (info) => {
-            userInfoProfile.setUserInfo(info);
+            console.log(info);
+            userInfoProfile.setUserInfoApi();
             popupProfile.close();
         }
-    }, api);
-    //return popupProfile;
+    }, apiProfile);
 
     buttonEditProfile.addEventListener ('click', function() {
         popupProfile.open();
@@ -101,6 +102,8 @@ apiProfile.getInitialCards().then((info) => {
     });
 
     popupProfile.setEventListeners();
+
+
 })
 
 //создать экземпляр класса UserInfo
@@ -153,15 +156,6 @@ popupFullSizeImage.setEventListeners();
  //   }
 //});
 
-
+//Api.getProfile().then(profile => console.log(profile.name));
 
 //создать экземпляр класса Section и набор первоначальных карточек
-fetch('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
-    headers: {
-        authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4'
-    }
-})
-    .then(res => res.json())
-    .then((result) => {
-        console.log(result);
-    });

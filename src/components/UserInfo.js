@@ -5,19 +5,20 @@ export class UserInfo {
         this._api = api;
     }
     getUserInfo() {
-
-        this._api.editProfile().then((newUserData) => {
-            return newUserData = {
-                name: this._name.textContent,
-                about: this._info.textContent
-            };
-            console.log(newUserData);
-        })
-
-        //return newUserData;
+        this._userData = {
+            user: this._name.textContent,
+            about: this._info.textContent
+        };
+        return this._userData;
     }
-    setUserInfo({name, about}) {
-        this._name.textContent = name;
+    setUserInfo({user, about}) {
+        this._name.textContent = user;
         this._info.textContent = about;
+    }
+    setUserInfoApi() {
+        this._api.getInitialCards().then((res) => {
+            this._name.textContent = res.name;
+            this._info.textContent = res.about;
+        })
     }
 }
