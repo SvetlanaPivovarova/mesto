@@ -4,7 +4,8 @@ import {formConfig, initialCards} from "../utils/data.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { buttonAddCard, buttonEditProfile,
-        inputUser, inputAbout
+        inputUser, inputAbout,
+        userName, userAbout
          } from "../utils/constants.js";
 import {Section} from "../components/Section.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
@@ -83,7 +84,8 @@ const apiProfile = new Api('https://mesto.nomoreparties.co/v1/cohort-38/users/me
 });
 
 apiProfile.getInitialCards().then((info) => {
-
+    userName.textContent = info.name;
+    userAbout.textContent = info.about;
     //создать для каждого попапа свой экземпляр класса PopupWithForm, PopupWithImage
     const popupProfile = new PopupWithForm({
         popupSelector: '.popup_type_profile',
