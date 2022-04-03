@@ -2,6 +2,9 @@ class Card {
     constructor(data, cardSelector, handleCardClick, api) {
       this._name = data.name;
       this._image = data.link;
+      this._id = data._id;
+      this._owner = data.owner._id;
+
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
       this._api = api;
@@ -20,6 +23,7 @@ class Card {
     
     //внешний метод, создающий карточку, наполняющий ее данными и возвращающий наружу
     generateCard() {
+        console.log(this._owner);
       this._element = this._getTemplate();
       this._cardDeleteButton = this._element.querySelector('.card__delete-icon');
       this._likeButton = this._element.querySelector('.card__like-icon');
@@ -46,7 +50,6 @@ class Card {
       });
       this._cardDeleteButton.addEventListener('click', (e) => {
         this._handleDeleteButton(e);
-
       });
     }
   
@@ -55,7 +58,9 @@ class Card {
     }
   
     _handleDeleteButton(e) {
-      e.target.closest('.card').remove();
+       this._api.deleteCard(this._id).then((res) => {
+           e.target.closest('.card').remove();
+       })
     };
   }
 

@@ -13,6 +13,8 @@ import {PopupWithImage} from "../components/PopupWithImage.js";
 import {UserInfo} from "../components/UserInfo.js";
 import {Api} from "../components/Api.js";
 
+let userId;
+
 //Создать объект, где будут храниться экземпляры валидаторов всех форм
 const formValidators = {}
 
@@ -31,10 +33,18 @@ const enableValidation = (config) => {
 
 enableValidation(formConfig);
 
+
+
 //функция создания карточки
 function createCard(item) {
     const card = new Card(item, '.card-template-default', handleCardClick, api);
     const cardElement = card.generateCard();
+    //console.log(card._id);
+    if (item.owner._id !== userId) {
+        const cardDeleteButton = cardElement.querySelector('.card__delete-icon');
+        cardDeleteButton.disabled = true;
+        cardDeleteButton.classList.add('card__delete-icon_unactive');
+    }
     return cardElement;
 }
 
@@ -47,9 +57,10 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
 });
 
 api.getInitialData().then((cards) => {
-
     const initialCardList = new Section({
             renderer: (item) =>{
+                console.log(item);
+
                 const cardElement = createCard(item);
                 initialCardList.addItem(cardElement);
             }
@@ -62,7 +73,8 @@ api.getInitialData().then((cards) => {
         popupSelector: '.popup_type_card',
         handleFormSubmit:  (cardUser) => {
             const cardElement = createCard(cardUser);
-
+            //const owner = {};
+            cardUser.owner = userId;
             initialCardList.addItem(cardElement);
             popupCard.close();
         },
@@ -87,12 +99,13 @@ const apiProfile = new Api('https://mesto.nomoreparties.co/v1/cohort-38/users/me
 apiProfile.getInitialData().then((info) => {
     userName.textContent = info.name;
     userAbout.textContent = info.about;
-
+    userId = info._id;
+    console.log(userId);
     const popupProfile = new PopupWithForm({
         popupSelector: '.popup_type_profile',
         handleFormSubmit: (info) => {
-            //console.log(info);
-            userInfoProfile.setUserInfoApi();
+
+            userInfoProfile.setUserInfoApi(info);
             popupProfile.close();
         },
         api: apiProfile
