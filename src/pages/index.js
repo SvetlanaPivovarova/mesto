@@ -46,7 +46,7 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
     }
 });
 
-api.getInitialCards().then((cards) => {
+api.getInitialData().then((cards) => {
     //console.log(cards);
     const initialCardList = new Section({
             //data: cards,
@@ -66,7 +66,8 @@ api.getInitialCards().then((cards) => {
             initialCardList.addItem(cardElement);
             popupCard.close();
         },
-    }, api);
+        api: api
+    });
 
     popupCard.setEventListeners();
 
@@ -83,18 +84,19 @@ const apiProfile = new Api('https://mesto.nomoreparties.co/v1/cohort-38/users/me
     }
 });
 
-apiProfile.getInitialCards().then((info) => {
+apiProfile.getInitialData().then((info) => {
     userName.textContent = info.name;
     userAbout.textContent = info.about;
-    //создать для каждого попапа свой экземпляр класса PopupWithForm, PopupWithImage
+
     const popupProfile = new PopupWithForm({
         popupSelector: '.popup_type_profile',
         handleFormSubmit: (info) => {
-            console.log(info);
+            //console.log(info);
             userInfoProfile.setUserInfoApi();
             popupProfile.close();
-        }
-    }, apiProfile);
+        },
+        api: apiProfile
+    });
 
     buttonEditProfile.addEventListener ('click', function() {
         popupProfile.open();
