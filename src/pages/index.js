@@ -47,15 +47,15 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
 });
 
 api.getInitialData().then((cards) => {
-    //console.log(cards);
+
     const initialCardList = new Section({
-            //data: cards,
             renderer: (item) =>{
                 const cardElement = createCard(item);
                 initialCardList.addItem(cardElement);
             }
         }, '.elements'
     );
+
     initialCardList.renderItems(cards);
 
     const popupCard = new PopupWithForm({
@@ -106,8 +106,6 @@ apiProfile.getInitialData().then((info) => {
     });
 
     popupProfile.setEventListeners();
-
-
 })
 
 //создать экземпляр класса UserInfo
@@ -121,45 +119,7 @@ function handleCardClick(name, link) {
   popupFullSizeImage.open(name, link);
 }
 
-//создать для каждого попапа свой экземпляр класса PopupWithForm, PopupWithImage
-//const popupProfile = new PopupWithForm({
-  //  popupSelector: '.popup_type_profile',
-  //  handleFormSubmit: (userInfo) => {
-  //      userInfoProfile.setUserInfo(userInfo);
-  //      popupProfile.close();
-  //  }
-//}, api);
-
-//const popupCard = new PopupWithForm({
-//    popupSelector: '.popup_type_card',
-//    handleFormSubmit:  (cardUser) => {
-//        const cardElement = createCard(cardUser);
-
-//        initialCardList.addItem(cardElement);
-//        popupCard.close();
-//    }
-//});
-
 const popupFullSizeImage = new PopupWithImage('.popup_type_image');
-
-//слушатели
-
-
-
-
-
-
 
 popupFullSizeImage.setEventListeners();
 
-//const api = new Api({
-//    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-38',
- //   headers: {
- //       authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
- //       'Content-Type': 'application/json'
- //   }
-//});
-
-//Api.getProfile().then(profile => console.log(profile.name));
-
-//создать экземпляр класса Section и набор первоначальных карточек

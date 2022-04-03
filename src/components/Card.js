@@ -27,14 +27,12 @@ class Card {
       this._setEventListeners();
     
       // добавить данные
-        //this._api.createNewCard(name, link).then((card) => {
-            this._element.querySelector('.card__place-title').textContent = this._name;
-            this._picture.src = this._image;
-            this._picture.alt = this._name;
+        this._element.querySelector('.card__place-title').textContent = this._name;
+        this._picture.src = this._image;
+        this._picture.alt = this._name;
 
-            // вурнуть элемент наружу
-            return this._element;
-        //})
+        // вурнуть элемент наружу
+        return this._element;
 
     }
 

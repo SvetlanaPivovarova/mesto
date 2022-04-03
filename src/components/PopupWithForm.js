@@ -28,7 +28,7 @@ export class PopupWithForm extends Popup {
                 this._handleFormSubmit(res);
             });
             console.log(this._getInputValues());
-            this._api.edit(this._getInputValues()).then((res) => {
+            this._api.editProfile(this._getInputValues()).then((res) => {
                 this._handleFormSubmit(res);
                 console.log(res);
             })
