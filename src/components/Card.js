@@ -49,10 +49,16 @@ class Card {
         this._handleCardClick(this._name, this._image);
       });
       this._likeButton.addEventListener('click', (e) => {
-        this._handleLikeButton(e);
+          console.log(this._likes.length);
+          this._api.putLike(this._id).then((res) => {
+              console.log(res.likes.length);
+              this._handleLikeButton(e);
+              this._likesAmount.textContent = res.likes.length;
+          })
+
       });
       this._cardDeleteButton.addEventListener('click', (event) => {
-          console.log(event.target.closest('.card'));
+          //console.log(event.target.closest('.card'));
           this._handleDeleteCard(this._id, event);
       });
     }

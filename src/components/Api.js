@@ -1,5 +1,5 @@
 export class Api {
-    constructor(url, headers) {
+    constructor(url, {headers}) {
         this._url = url;
         this._headers = headers;
     }
@@ -22,12 +22,8 @@ export class Api {
 
     getInitialData() {
         const promise = fetch(this._url, {
-                    method: 'GET',
-            headers: {
-                authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
-                'Accept': 'application/json',
-                'Content-Type': 'application/json; charset=utf-8'
-            },
+            method: 'GET',
+            headers: this._headers,
                 });
         return this._makeRequest(promise);
     }
@@ -35,11 +31,7 @@ export class Api {
    createNewCard(newCard) {
         const promise = fetch((this._url), {
             method: 'POST',
-            headers: {
-                authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
-                'Accept': 'application/json',
-                'Content-Type': 'application/json; charset=utf-8'
-            },
+            headers: this._headers,
             body: JSON.stringify({
                 name: newCard.name,
                 link: newCard.link,
@@ -52,11 +44,7 @@ export class Api {
    deleteCard(id) {
         const promise = fetch((`${this._url}/${id}`), {
             method: 'DELETE',
-            headers: {
-                authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
-                'Accept': 'application/json',
-                'Content-Type': 'application/json; charset=utf-8'
-            },
+            headers: this._headers,
         });
         return this._makeRequest(promise);
     }
@@ -64,17 +52,20 @@ export class Api {
     editProfile(newUser) {
         const promise = fetch((this._url), {
             method: 'PATCH',
-            headers: {
-                authorization: 'e0e4f956-51a1-4eae-85fd-7abacc4211a4',
-                'Accept': 'application/json',
-                'Content-Type': 'application/json; charset=utf-8'
-            },
+            headers: this._headers,
             body: JSON.stringify({
                 name: newUser.user,
                 about: newUser.about
             })
         });
         console.log(newUser);
+        return this._makeRequest(promise);
+    }
+    putLike(id) {
+        const promise = fetch((`${this._url}/${id}/likes`), {
+            method: 'PUT',
+            headers: this._headers
+        });
         return this._makeRequest(promise);
     }
 }
