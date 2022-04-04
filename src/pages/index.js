@@ -13,7 +13,9 @@ import {PopupWithImage} from "../components/PopupWithImage.js";
 import {UserInfo} from "../components/UserInfo.js";
 import {Api} from "../components/Api.js";
 
+//создать переменную
 let userId;
+let deletedCardData = {};
 
 //Создать объект, где будут храниться экземпляры валидаторов всех форм
 const formValidators = {}
@@ -33,13 +35,10 @@ const enableValidation = (config) => {
 
 enableValidation(formConfig);
 
-
-
 //функция создания карточки
 function createCard(item) {
     const card = new Card(item, '.card-template-default', handleCardClick, api, handleDeleteCard);
     const cardElement = card.generateCard();
-    //console.log(card._id);
     if (item.owner._id !== userId) {
         const cardDeleteButton = cardElement.querySelector('.card__delete-icon');
         cardDeleteButton.disabled = true;
@@ -59,8 +58,7 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
 api.getInitialData().then((cards) => {
     const initialCardList = new Section({
             renderer: (item) =>{
-                console.log(item);
-
+                //console.log(item);
                 const cardElement = createCard(item);
                 initialCardList.addItem(cardElement);
             }
@@ -72,14 +70,12 @@ api.getInitialData().then((cards) => {
     const popupCard = new PopupWithForm({
         popupSelector: '.popup_type_card',
         handleFormSubmit:  (cardUser) => {
-            //const owner = {};
             api.createNewCard(cardUser).then((res) => {
                 const cardElement = createCard(res);
                 cardUser.owner = userId;
                 initialCardList.addItem(cardElement);
                 popupCard.close();
             })
-
         },
         api: api
     });
@@ -103,7 +99,6 @@ apiProfile.getInitialData().then((info) => {
     userName.textContent = info.name;
     userAbout.textContent = info.about;
     userId = info._id;
-    console.log(userId);
     const popupProfile = new PopupWithForm({
         popupSelector: '.popup_type_profile',
         handleFormSubmit: (info) => {
@@ -117,7 +112,6 @@ apiProfile.getInitialData().then((info) => {
 
     buttonEditProfile.addEventListener ('click', function() {
         popupProfile.open();
-        //const {name, about} = userInfoProfile.getUserInfo()
         inputUser.value = info.name;
         inputAbout.value = info.about;
     });
@@ -135,7 +129,6 @@ const userInfoProfile = new UserInfo({
 function handleCardClick(name, link) {
   popupFullSizeImage.open(name, link);
 }
-let deletedCardData = {}
 
 function handleDeleteCard(cardId, event) {
     popupDeleteCard.open();

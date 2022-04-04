@@ -25,7 +25,6 @@ class Card {
     
     //внешний метод, создающий карточку, наполняющий ее данными и возвращающий наружу
     generateCard() {
-        console.log(this._likes);
       this._element = this._getTemplate();
       this._cardDeleteButton = this._element.querySelector('.card__delete-icon');
       this._likeButton = this._element.querySelector('.card__like-icon');
@@ -53,27 +52,14 @@ class Card {
         this._handleLikeButton(e);
       });
       this._cardDeleteButton.addEventListener('click', (event) => {
-          console.log(event);
           console.log(event.target.closest('.card'));
           this._handleDeleteCard(this._id, event);
-          //this._handleDeleteButton(e);
       });
     }
 
-    //deletedCardId() {
-     //   const cardId = this._id;
-     //   return cardId;
-    //}
-  
     _handleLikeButton(e) {
       e.target.classList.toggle('card__like-icon_active');
     }
-  
-    //_handleDeleteButton(e) {
-    //   this._api.deleteCard(this._id).then((res) => {
-    //       e.target.closest('.card').remove();
-    //   })
-    //};
   }
 
   export {Card};

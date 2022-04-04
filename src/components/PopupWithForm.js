@@ -26,11 +26,9 @@ export class PopupWithForm extends Popup {
             // передадим ей объект — результат работы _getInputValues
 
             if (Object.keys(this._getInputValues()).length !== 0) {
-                console.log(this._getInputValues());
                 this._handleFormSubmit(this._getInputValues());
             }
             else {
-                console.log('Пусто');
                 this._handleFormSubmit(evt);
             }
         });
