@@ -68,5 +68,12 @@ export class Api {
         });
         return this._makeRequest(promise);
     }
+    deleteLike(id) {
+        const promise = fetch((`${this._url}/${id}/likes`), {
+            method: 'DELETE',
+            headers: this._headers,
+        });
+        return this._makeRequest(promise);
+    }
 }
 
