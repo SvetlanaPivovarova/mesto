@@ -49,10 +49,17 @@ class Card {
       this._likeButton.addEventListener('click', (e) => {
         this._handleLikeButton(e);
       });
-      this._cardDeleteButton.addEventListener('click', (e) => {
-          this._handleDeleteCard();
-        //this._handleDeleteButton(e);
+      this._cardDeleteButton.addEventListener('click', (event) => {
+          console.log(event);
+          console.log(event.target.closest('.card'));
+          this._handleDeleteCard(this._id, event);
+          //this._handleDeleteButton(e);
       });
+    }
+
+    deletedCardId() {
+        const cardId = this._id;
+        return cardId;
     }
   
     _handleLikeButton(e) {

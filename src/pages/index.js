@@ -135,9 +135,13 @@ const userInfoProfile = new UserInfo({
 function handleCardClick(name, link) {
   popupFullSizeImage.open(name, link);
 }
+let deletedCardData = {}
 
-function handleDeleteCard() {
+function handleDeleteCard(cardId, event) {
     popupDeleteCard.open();
+    deletedCardData.deletedCardId = cardId;
+    deletedCardData.deletedCardEvent = event;
+    return deletedCardData;
 }
 
 const popupFullSizeImage = new PopupWithImage('.popup_type_image');
@@ -145,7 +149,10 @@ const popupFullSizeImage = new PopupWithImage('.popup_type_image');
 const popupDeleteCard = new PopupWithForm({
     popupSelector: '.popup_type_delete-card',
     handleFormSubmit: (e) => {
-        popupDeleteCard._handleDeleteButton(e);
+        api.deleteCard(deletedCardData.deletedCardId).then((res) => {
+            deletedCardData.deletedCardEvent.target.closest('.card').remove();
+            popupDeleteCard.close();
+        })
     },
     api: api
 });
