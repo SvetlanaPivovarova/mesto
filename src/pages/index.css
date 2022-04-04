@@ -52,3 +52,4 @@
 @import url(../blocks/popup/__image-container/popup__image-container.css);
 @import url(../blocks/popup/__image-item/popup__image-item.css);
 @import url(../blocks/popup/__title/_type/popup__title_type_image-caption.css);
+@import url(../blocks/popup/__title/_type/popup__title_type_delete-window.css);

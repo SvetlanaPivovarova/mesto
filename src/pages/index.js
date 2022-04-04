@@ -37,7 +37,7 @@ enableValidation(formConfig);
 
 //функция создания карточки
 function createCard(item) {
-    const card = new Card(item, '.card-template-default', handleCardClick, api);
+    const card = new Card(item, '.card-template-default', handleCardClick, api, handleDeleteCard);
     const cardElement = card.generateCard();
     //console.log(card._id);
     if (item.owner._id !== userId) {
@@ -72,11 +72,14 @@ api.getInitialData().then((cards) => {
     const popupCard = new PopupWithForm({
         popupSelector: '.popup_type_card',
         handleFormSubmit:  (cardUser) => {
-            const cardElement = createCard(cardUser);
             //const owner = {};
-            cardUser.owner = userId;
-            initialCardList.addItem(cardElement);
-            popupCard.close();
+            api.createNewCard(cardUser).then((res) => {
+                const cardElement = createCard(res);
+                cardUser.owner = userId;
+                initialCardList.addItem(cardElement);
+                popupCard.close();
+            })
+
         },
         api: api
     });
@@ -104,9 +107,10 @@ apiProfile.getInitialData().then((info) => {
     const popupProfile = new PopupWithForm({
         popupSelector: '.popup_type_profile',
         handleFormSubmit: (info) => {
-
-            userInfoProfile.setUserInfoApi(info);
-            popupProfile.close();
+            apiProfile.editProfile(info).then((res) => {
+                userInfoProfile.setUserInfoApi(res);
+                popupProfile.close();
+            })
         },
         api: apiProfile
     });
@@ -132,7 +136,21 @@ function handleCardClick(name, link) {
   popupFullSizeImage.open(name, link);
 }
 
+function handleDeleteCard() {
+    popupDeleteCard.open();
+}
+
 const popupFullSizeImage = new PopupWithImage('.popup_type_image');
 
+const popupDeleteCard = new PopupWithForm({
+    popupSelector: '.popup_type_delete-card',
+    handleFormSubmit: (e) => {
+        popupDeleteCard._handleDeleteButton(e);
+    },
+    api: api
+});
+
 popupFullSizeImage.setEventListeners();
+
+popupDeleteCard.setEventListeners();
 
