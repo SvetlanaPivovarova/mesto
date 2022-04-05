@@ -3,9 +3,9 @@ import '../pages/index.css';
 import {formConfig, initialCards} from "../utils/data.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
-import { buttonAddCard, buttonEditProfile,
+import { buttonAddCard, buttonEditProfile, buttonEditAvatar,
         inputUser, inputAbout,
-        userName, userAbout
+        userName, userAbout, userAvatar
          } from "../utils/constants.js";
 import {Section} from "../components/Section.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
@@ -154,3 +154,8 @@ popupFullSizeImage.setEventListeners();
 
 popupDeleteCard.setEventListeners();
 
+buttonEditAvatar.addEventListener('click', function () {
+    apiProfile.editAvatar().then((res) => {
+        userAvatar.src = res.avatar;
+    })
+})

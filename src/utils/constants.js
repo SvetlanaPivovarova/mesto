@@ -1,6 +1,7 @@
 //кнопки
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');
+export const buttonEditAvatar = document.querySelector('.profile__avatar-edit');
 
 //DOM-элементы модальных окон
 export const fullSizeImage = document.querySelector('.popup__image-item');
@@ -15,3 +16,4 @@ export const inputAbout = document.querySelector('.form__text_type_about');
 
 export const userName = document.querySelector('.profile__name');
 export const userAbout = document.querySelector('.profile__profession');
+export const userAvatar = document.querySelector('.profile__avatar-image');
