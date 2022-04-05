@@ -61,6 +61,7 @@ export class Api {
         console.log(newUser);
         return this._makeRequest(promise);
     }
+
     putLike(id) {
         const promise = fetch((`${this._url}/${id}/likes`), {
             method: 'PUT',
@@ -68,11 +69,24 @@ export class Api {
         });
         return this._makeRequest(promise);
     }
+
     deleteLike(id) {
         const promise = fetch((`${this._url}/${id}/likes`), {
             method: 'DELETE',
             headers: this._headers,
         });
+        return this._makeRequest(promise);
+    }
+
+    editAvatar(newUser) {
+        const promise = fetch((`${this._url}/avatar`), {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: newUser.avatar
+            })
+        });
+        console.log(newUser);
         return this._makeRequest(promise);
     }
 }

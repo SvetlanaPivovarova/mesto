@@ -6,7 +6,7 @@ class Card {
       this._name = data.name;
       this._image = data.link;
       this._id = data._id;
-      this._owner = data.owner._id;
+      //this._owner = data.owner._id;
       this._likes = data.likes;
 
       this._cardSelector = cardSelector;
@@ -43,7 +43,6 @@ class Card {
 
         // вурнуть элемент наружу
         return this._element;
-
     }
 
     //приватный метод установки слушателей на элементы внутри карточки
