@@ -78,16 +78,14 @@ export class Api {
         return this._makeRequest(promise);
     }
 
-    editAvatar() {
+    editAvatar(newAvatar) {
         const promise = fetch((`${this._url}/avatar`), {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                //avatar: newUser.avatar
-                avatar: 'https://lh3.googleusercontent.com/QH8wyS7gEjKUbpmKb4ZTogBCXOQ8iKg0cFEcj4Da9iTs1NpdCW13yN4P-BLqzqztKdubYNaKxXtW1y50Zw=s220'
+                avatar: newAvatar.avatar
             })
         });
-        //console.log(newUser);
         return this._makeRequest(promise);
     }
 }

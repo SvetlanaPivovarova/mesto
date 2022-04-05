@@ -102,6 +102,23 @@
             </form>
         </div>
     </div>
+    <div class="popup popup_type_avatar">
+        <div class="popup__container">
+            <h2 class="popup__title">Обновить аватар</h2>
+            <button class="popup__close-btn" type="button" aria-label="Закрыть"></button>
+            <form class="form" name="edit-avatar" novalidate>
+                <input
+                        type="url"
+                        placeholder="Ссылка на новый аватар"
+                        name="avatar"
+                        class="form__text form__text_type_place-link"
+                        required
+                >
+                <span id="avatar-error" class="form__error"></span>
+                <button type="submit" class="form__submit-btn">Сохранить</button>
+            </form>
+        </div>
+    </div>
     <template id="card-template" class="card-template-default">
       <article class="card">
         <div class="card__container">

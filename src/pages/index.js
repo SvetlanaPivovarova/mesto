@@ -150,12 +150,23 @@ const popupDeleteCard = new PopupWithForm({
     api: api
 });
 
+const popupEditAvatar = new PopupWithForm({
+    popupSelector: '.popup_type_avatar',
+    handleFormSubmit: (newAvatar) => {
+            apiProfile.editAvatar(newAvatar).then((res) => {
+                userAvatar.src = res.avatar;
+            })
+            popupEditAvatar.close();
+    },
+    api: apiProfile
+});
+
 popupFullSizeImage.setEventListeners();
 
 popupDeleteCard.setEventListeners();
 
 buttonEditAvatar.addEventListener('click', function () {
-    apiProfile.editAvatar().then((res) => {
-        userAvatar.src = res.avatar;
-    })
-})
+    popupEditAvatar.open();
+});
+
+popupEditAvatar.setEventListeners();
