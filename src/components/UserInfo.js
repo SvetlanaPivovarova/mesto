@@ -16,7 +16,7 @@ export class UserInfo {
         this._info.textContent = about;
     }
     setUserInfoApi() {
-        this._api.getInitialData().then((res) => {
+        this._api.getProfile().then((res) => {
             this._name.textContent = res.name;
             this._info.textContent = res.about;
         })

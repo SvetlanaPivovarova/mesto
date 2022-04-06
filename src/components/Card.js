@@ -6,7 +6,6 @@ class Card {
       this._name = data.name;
       this._image = data.link;
       this._id = data._id;
-      //this._owner = data.owner._id;
       this._likes = data.likes;
 
       this._cardSelector = cardSelector;
@@ -56,12 +55,20 @@ class Card {
                   this._handleLikeButton(e);
                   this._likesAmount.textContent = res.likes.length;
               })
+                  .catch((err) => {
+                  console.error(err);
+                  throw err;
+              })
           }
           else {
               this._api.deleteLike(this._id).then((res) => {
                   this._handleLikeButton(e);
                   this._likesAmount.textContent = res.likes.length;
               })
+                  .catch((err) => {
+                  console.error(err);
+                  throw err;
+              });
           }
       });
       this._cardDeleteButton.addEventListener('click', (event) => {

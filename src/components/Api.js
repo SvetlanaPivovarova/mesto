@@ -18,22 +18,29 @@ export class Api {
                 console.log(result);
                 return result;
             })
-            .catch((err) => {
-                console.error(err);
-                throw err;
-            });
+            .finally(() => {
+
+            })
     }
 
     getInitialData() {
-        const promise = fetch(this._url, {
+        const promise = fetch((`${this._url}/cards`), {
             method: 'GET',
             headers: this._headers,
                 });
         return this._makeRequest(promise);
     }
 
+    getProfile() {
+        const promise = fetch((`${this._url}/users/me`), {
+            method: 'GET',
+            headers: this._headers,
+        });
+        return this._makeRequest(promise);
+    }
+
    createNewCard(newCard) {
-        const promise = fetch((this._url), {
+        const promise = fetch((`${this._url}/cards`), {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -46,7 +53,7 @@ export class Api {
    }
 
    deleteCard(id) {
-        const promise = fetch((`${this._url}/${id}`), {
+        const promise = fetch((`${this._url}/cards/${id}`), {
             method: 'DELETE',
             headers: this._headers,
         });
@@ -54,7 +61,7 @@ export class Api {
     }
 
     editProfile(newUser) {
-        const promise = fetch((this._url), {
+        const promise = fetch((`${this._url}/users/me`), {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -67,7 +74,7 @@ export class Api {
     }
 
     putLike(id) {
-        const promise = fetch((`${this._url}/${id}/likes`), {
+        const promise = fetch((`${this._url}/cards/${id}/likes`), {
             method: 'PUT',
             headers: this._headers
         });
@@ -75,7 +82,7 @@ export class Api {
     }
 
     deleteLike(id) {
-        const promise = fetch((`${this._url}/${id}/likes`), {
+        const promise = fetch((`${this._url}/cards/${id}/likes`), {
             method: 'DELETE',
             headers: this._headers,
         });
@@ -83,7 +90,7 @@ export class Api {
     }
 
     editAvatar(newAvatar) {
-        const promise = fetch((`${this._url}/avatar`), {
+        const promise = fetch((`${this._url}/users/me/avatar`), {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({

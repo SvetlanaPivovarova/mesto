@@ -35,9 +35,7 @@ export class PopupWithForm extends Popup {
             } )
             // добавим вызов функции _handleFormSubmit
             // передадим ей объект — результат работы _getInputValues
-
             if (Object.keys(this._getInputValues()).length !== 0) {
-                console.log(this._getInputValues());
                 this._handleFormSubmit(this._getInputValues());
             }
             else {
