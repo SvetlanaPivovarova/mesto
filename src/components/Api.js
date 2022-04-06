@@ -9,7 +9,10 @@ export class Api {
             if (res.ok) {
                 return res.json();
             }
-            throw 'Ошибка'
+            else {
+                return Promise.reject(`Ошибка: ${res.status}`);
+                throw 'Ошибка запроса';
+            }
         })
             .then((result) => {
                 console.log(result);
@@ -17,6 +20,7 @@ export class Api {
             })
             .catch((err) => {
                 console.error(err);
+                throw err;
             });
     }
 
@@ -87,6 +91,15 @@ export class Api {
             })
         });
         return this._makeRequest(promise);
+    }
+
+    renderLoading({isLoading, btnSubProgress, btnSub}) {
+        if (isLoading) {
+            btnSubProgress();
+        }
+        else {
+            btnSub();
+        }
     }
 }
 

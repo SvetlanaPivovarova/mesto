@@ -4,6 +4,7 @@ export class PopupWithForm extends Popup {
     static selectors = {
         formSelector: '.form',
         inputSelector: '.form__text',
+        btnSubSelector: '.form__submit-btn'
     }
     constructor({ popupSelector, handleFormSubmit, api }) {
         super(popupSelector);
@@ -11,6 +12,8 @@ export class PopupWithForm extends Popup {
         this._form = this._popupElement.querySelector(PopupWithForm.selectors.formSelector);
         this._inputList = this._form.querySelectorAll(PopupWithForm.selectors.inputSelector);
         this._api = api;
+        this._subButton = this._form.querySelector(PopupWithForm.selectors.btnSubSelector);
+        this._subButtontxt = this._subButton.textContent;
     }
     _getInputValues() {
         this._inputValues = {};
@@ -21,7 +24,15 @@ export class PopupWithForm extends Popup {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-
+            this._api.renderLoading({
+                isLoading: true,
+                btnSubProgress: () => {
+                    this._subButton.textContent = 'Сохранение...'
+                },
+                btnSub: () => {
+                    this._subButton.textContent = 'Save';
+                }
+            } )
             // добавим вызов функции _handleFormSubmit
             // передадим ей объект — результат работы _getInputValues
 
@@ -36,6 +47,15 @@ export class PopupWithForm extends Popup {
     }
     close() {
         super.close();
+        this._api.renderLoading({
+            isLoading: false,
+            btnSubProgress: () => {
+                this._subButton.textContent = 'Сохранение...'
+            },
+            btnSub: () => {
+                this._subButton.textContent = this._subButtontxt;
+            }
+        } )
         this._form.reset();
     }
 }
