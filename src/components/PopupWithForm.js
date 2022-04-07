@@ -30,7 +30,7 @@ export class PopupWithForm extends Popup {
                     this._subButton.textContent = 'Сохранение...'
                 },
                 btnSub: () => {
-                    this._subButton.textContent = 'Save';
+                    this._subButton.textContent = this._subButtontxt;
                 }
             } )
             // добавим вызов функции _handleFormSubmit

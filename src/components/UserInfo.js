@@ -1,7 +1,10 @@
+import {userAvatar} from "../utils/constants";
+
 export class UserInfo {
-    constructor({nameSelector, infoSelector}, api) {
+    constructor({nameSelector, infoSelector, avatarSelector}, api) {
         this._name = document.querySelector(nameSelector);
         this._info = document.querySelector(infoSelector);
+        this._avatar = document.querySelector(avatarSelector);
         this._api = api;
     }
     getUserInfo() {
@@ -11,14 +14,9 @@ export class UserInfo {
         };
         return this._userData;
     }
-    setUserInfo({user, about}) {
-        this._name.textContent = user;
-        this._info.textContent = about;
-    }
-    setUserInfoApi() {
-        this._api.getProfile().then((res) => {
-            this._name.textContent = res.name;
-            this._info.textContent = res.about;
-        })
+    setUserInfo(userInfo) {
+        this._name.textContent = userInfo.name;
+        this._info.textContent = userInfo.about;
+        this._avatar.src = userInfo.avatar;
     }
 }
