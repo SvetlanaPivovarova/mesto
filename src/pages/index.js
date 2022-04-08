@@ -82,8 +82,8 @@ Promise.all([api.getProfile(), api.getInitialData()])
 
         buttonEditProfile.addEventListener ('click', function() {
             popupProfile.open();
-            inputUser.value = info.name;
-            inputAbout.value = info.about;
+            inputUser.value = userInfoProfile.getUserInfo().user;
+            inputAbout.value = userInfoProfile.getUserInfo().about;
         });
 
         popupProfile.setEventListeners();
