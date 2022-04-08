@@ -13,5 +13,3 @@ export const cardInputLink = document.querySelector('.form__text_type_place-link
 
 export const inputUser = document.querySelector('.form__text_type_name');
 export const inputAbout = document.querySelector('.form__text_type_about');
-
-export const userAvatar = document.querySelector('.profile__avatar-image');

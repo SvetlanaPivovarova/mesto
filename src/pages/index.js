@@ -4,8 +4,7 @@ import {formConfig} from "../utils/data.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { buttonAddCard, buttonEditProfile, buttonEditAvatar,
-        inputUser, inputAbout,
-        userAvatar
+        inputUser, inputAbout
          } from "../utils/constants.js";
 import {Section} from "../components/Section.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
@@ -180,7 +179,7 @@ const popupEditAvatar = new PopupWithForm({
     handleFormSubmit: (newAvatar) => {
         popupEditAvatar.submitButton().textContent = 'Сохранение...';
         api.editAvatar(newAvatar).then((res) => {
-                userAvatar.src = res.avatar;
+            userInfoProfile.setUserInfo(res);
             })
                 .then(() => {
                     popupEditAvatar.close();
