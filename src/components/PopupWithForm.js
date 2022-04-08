@@ -13,13 +13,19 @@ export class PopupWithForm extends Popup {
         this._inputList = this._form.querySelectorAll(PopupWithForm.selectors.inputSelector);
         this._api = api;
         this._subButton = this._form.querySelector(PopupWithForm.selectors.btnSubSelector);
-        this._subButtontxt = this._subButton.textContent;
+        //this._subButtontxt = this._subButton.textContent;
     }
+
     _getInputValues() {
         this._inputValues = {};
         this._inputList.forEach(input => this._inputValues[input.name] = input.value);
         return this._inputValues;
     }
+
+    submitButton() {
+        return this._subButton;
+    }
+
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
@@ -35,25 +41,26 @@ export class PopupWithForm extends Popup {
             } )
             // добавим вызов функции _handleFormSubmit
             // передадим ей объект — результат работы _getInputValues
-            if (Object.keys(this._getInputValues()).length !== 0) {
-                this._handleFormSubmit(this._getInputValues());
-            }
-            else {
-                this._handleFormSubmit(evt);
-            }
+            this._handleFormSubmit(this._getInputValues());
+            //if (Object.keys(this._getInputValues()).length !== 0) {
+            //    this._handleFormSubmit(this._getInputValues());
+            //}
+            //else {
+                //this._handleFormSubmit(evt);
+            //}
         });
     }
     close() {
         super.close();
-        this._api.renderLoading({
-            isLoading: false,
-            btnSubProgress: () => {
-                this._subButton.textContent = 'Сохранение...'
-            },
-            btnSub: () => {
-                this._subButton.textContent = this._subButtontxt;
-            }
-        } )
+        //this._api.renderLoading({
+        //    isLoading: false,
+        //    btnSubProgress: () => {
+        //        this._subButton.textContent = 'Сохранение...'
+        //    },
+        //    btnSub: () => {
+        //        this._subButton.textContent = this._subButtontxt;
+        //    }
+        //} )
         this._form.reset();
     }
 }
