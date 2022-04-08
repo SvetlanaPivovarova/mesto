@@ -1,18 +1,18 @@
 import '../pages/index.css';
 
-import {formConfig, initialCards} from "../utils/data.js";
+import {formConfig} from "../utils/data.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { buttonAddCard, buttonEditProfile, buttonEditAvatar,
         inputUser, inputAbout,
-        userName, userAbout, userAvatar
+        userAvatar
          } from "../utils/constants.js";
 import {Section} from "../components/Section.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {UserInfo} from "../components/UserInfo.js";
 import {Api} from "../components/Api.js";
-import {ConfirmationPopup} from "../components/ConfirmationPopup";
+import {ConfirmationPopup} from "../components/ConfirmationPopup.js";
 
 //создать переменную
 let userId;
@@ -68,7 +68,7 @@ Promise.all([api.getProfile(), api.getInitialData()])
                 api.editProfile(info).then((res) => {
                     userInfoProfile.setUserInfo(res);
                 })
-                    .then((res) => {
+                    .then(() => {
                         popupProfile.close();
                     })
                     .catch((err) => {
@@ -78,8 +78,7 @@ Promise.all([api.getProfile(), api.getInitialData()])
                     .finally(() => {
                         popupProfile.submitButton().textContent = 'Сохранить';
                     })
-            },
-            api: api
+            }
         });
 
         buttonEditProfile.addEventListener ('click', function() {
@@ -110,7 +109,7 @@ Promise.all([api.getProfile(), api.getInitialData()])
                     cardUser.owner = userId;
                     initialCardList.addItem(cardElement);
                     })
-                    .then((res) => {
+                    .then(() => {
                         popupCard.close();
                     })
                     .catch((err) => {
@@ -120,8 +119,7 @@ Promise.all([api.getProfile(), api.getInitialData()])
                     .finally(() => {
                         popupCard.submitButton().textContent = 'Создать';
                     })
-            },
-            api: api
+            }
         });
 
         popupCard.setEventListeners();
@@ -140,7 +138,7 @@ const userInfoProfile = new UserInfo({
     nameSelector: '.profile__name',
     infoSelector: '.profile__profession',
     avatarSelector: '.profile__avatar-image'
-}, api);
+});
 
 //функция открывания попап с картинкой при клике на карточку
 function handleCardClick(name, link) {
@@ -161,10 +159,10 @@ const popupDeleteCard = new ConfirmationPopup({
     handleFormSubmit: () => {
         popupDeleteCard.submitButton().textContent = 'Сохранение...';
         api.deleteCard(deletedCardData.deletedCardId)
-            .then((res) => {
+            .then(() => {
             deletedCardData.deletedCardEvent.target.closest('.card').remove();
         })
-            .then((res) => {
+            .then(() => {
                 popupDeleteCard.close();
             })
             .catch((err) => {
@@ -184,7 +182,7 @@ const popupEditAvatar = new PopupWithForm({
         api.editAvatar(newAvatar).then((res) => {
                 userAvatar.src = res.avatar;
             })
-                .then((res) => {
+                .then(() => {
                     popupEditAvatar.close();
                 })
                 .catch((err) => {

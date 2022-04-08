@@ -1,11 +1,8 @@
-import {userAvatar} from "../utils/constants";
-
 export class UserInfo {
-    constructor({nameSelector, infoSelector, avatarSelector}, api) {
+    constructor({nameSelector, infoSelector, avatarSelector}) {
         this._name = document.querySelector(nameSelector);
         this._info = document.querySelector(infoSelector);
         this._avatar = document.querySelector(avatarSelector);
-        this._api = api;
     }
     getUserInfo() {
         this._userData = {

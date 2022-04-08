@@ -18,9 +18,6 @@ export class Api {
                 console.log(result);
                 return result;
             })
-            .finally(() => {
-
-            })
     }
 
     getInitialData() {
@@ -98,15 +95,6 @@ export class Api {
             })
         });
         return this._makeRequest(promise);
-    }
-
-    renderLoading({isLoading, btnSubProgress, btnSub}) {
-        if (isLoading) {
-            btnSubProgress();
-        }
-        else {
-            btnSub();
-        }
     }
 }
 
