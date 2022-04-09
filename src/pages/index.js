@@ -44,6 +44,7 @@ function createCard(item) {
         cardDeleteButton.disabled = true;
         cardDeleteButton.classList.add('card__delete-icon_unactive');
     }
+    card.cardHasUserLike(userId);
     return cardElement;
 }
 

@@ -7,7 +7,6 @@ class Card {
       this._image = data.link;
       this._id = data._id;
       this._likes = data.likes;
-
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
       this._api = api;
@@ -42,6 +41,15 @@ class Card {
 
         // вурнуть элемент наружу
         return this._element;
+    }
+
+    cardHasUserLike(userId) {
+        const cardHasLike = this._likes.some(like => like._id === userId);
+        if (cardHasLike) {
+            this._likeButton.classList.add(Card.selectors.likeActiveClass);
+        } else {
+            this._likeButton.classList.remove(Card.selectors.likeActiveClass);
+        }
     }
 
     //приватный метод установки слушателей на элементы внутри карточки
